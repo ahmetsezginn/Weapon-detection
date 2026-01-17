@@ -66,7 +66,7 @@ This system uses deep learning to detect threats in images, videos, and real-tim
 ### Step 1: Clone or Download the Project
 
 ```bash
-git clone <repository-url>
+git clone <https://github.com/ahmetsezginn/Weapon-detection>
 cd weapon-detection/web
 ```
 
