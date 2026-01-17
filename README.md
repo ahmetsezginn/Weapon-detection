@@ -4,7 +4,7 @@ An AI-powered real-time threat detection system using YOLOv8 computer vision to 
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Flask](https://img.shields.io/badge/Flask-2.3-green.svg)
-![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-red.svg)
+![YOLOv11](https://img.shields.io/badge/YOLOv11-Ultralytics-red.svg)
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.8-orange.svg)
 
 ---
