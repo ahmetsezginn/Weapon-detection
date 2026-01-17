@@ -1,0 +1,1360 @@
+{% extends "base.html" %}
+
+{% block title %}Overview - AI Threat Detection System{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --accent-color: #667eea;
+        --text-dark: #1a202c;
+        --text-light: #718096;
+        --bg-light: #f7fafc;
+    }
+    
+    * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    
+    /* Professional Hero Section */
+    .overview-hero-professional {
+        position: relative;
+        padding: 140px 0 100px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        overflow: hidden;
+    }
+    
+    .overview-hero-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%),
+            radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+        opacity: 0.6;
+    }
+    
+    .overview-hero-content-professional {
+        position: relative;
+        z-index: 2;
+        color: white;
+    }
+    
+    .overview-hero-badge-professional {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.625rem 1.5rem;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 50px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        margin-bottom: 2rem;
+    }
+    
+    .overview-hero-badge-professional svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .overview-hero-title-professional {
+        font-size: 3.75rem;
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        color: white;
+    }
+    
+    .highlight-text {
+        background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .overview-hero-description-professional {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: 3rem;
+        max-width: 600px;
+    }
+    
+    .overview-hero-metrics {
+        display: flex;
+        gap: 2.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .metric-item-professional {
+        padding: 1.5rem 2rem;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        min-width: 140px;
+        transition: all 0.3s ease;
+    }
+    
+    .metric-item-professional:hover {
+        background: rgba(255, 255, 255, 0.18);
+        transform: translateY(-3px);
+    }
+    
+    .metric-value {
+        font-size: 2rem;
+        font-weight: 800;
+        color: white;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+    
+    .metric-label {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.85);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+    }
+    
+    .overview-hero-visual-professional {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .security-feature-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .security-feature-item {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .security-feature-item:hover {
+        background: rgba(255, 255, 255, 0.18);
+        transform: translateX(10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .security-feature-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        flex-shrink: 0;
+    }
+    
+    .security-feature-content {
+        flex: 1;
+    }
+    
+    .security-feature-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.25rem;
+    }
+    
+    .security-feature-desc {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+    
+    /* Content Sections */
+    .content-section {
+        padding: 80px 0;
+    }
+    
+    .section-header-overview {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+    
+    .section-label-overview {
+        display: inline-block;
+        padding: 0.5rem 1.25rem;
+        background: var(--primary-gradient);
+        color: white;
+        border-radius: 50px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+    
+    .section-title-overview {
+        font-size: 2.75rem;
+        font-weight: 800;
+        color: var(--text-dark);
+        margin: 1rem 0;
+        line-height: 1.2;
+    }
+    
+    .section-description-overview {
+        font-size: 1.125rem;
+        color: var(--text-light);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.7;
+    }
+    
+    /* Problem Cards */
+    .problem-grid-overview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .problem-card-overview {
+        background: white;
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .problem-card-overview:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+    
+    .problem-icon-overview {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        color: #ef4444;
+    }
+    
+    .problem-title-overview {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+    }
+    
+    .problem-text-overview {
+        color: var(--text-light);
+        line-height: 1.8;
+        font-size: 1rem;
+    }
+    
+    /* Introduction Section */
+    .intro-section-overview {
+        background: var(--bg-light);
+        padding: 100px 0;
+    }
+    
+    .intro-main-card-overview {
+        background: white;
+        border-radius: 20px;
+        padding: 4rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 3rem;
+    }
+    
+    .intro-header-overview {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+    
+    .intro-icon-large-overview {
+        width: 80px;
+        height: 80px;
+        background: var(--primary-gradient);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        flex-shrink: 0;
+    }
+    
+    .intro-title-main-overview {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--text-dark);
+        margin: 0;
+    }
+    
+    .intro-text-content-overview {
+        color: var(--text-light);
+        line-height: 1.9;
+        font-size: 1.05rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .intro-features-grid-overview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .intro-feature-box-overview {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+    
+    .intro-feature-box-overview:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .intro-feature-icon-overview {
+        width: 40px;
+        height: 40px;
+        background: var(--primary-gradient);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        flex-shrink: 0;
+    }
+    
+    .intro-feature-text-overview {
+        color: var(--text-dark);
+        font-weight: 500;
+        line-height: 1.6;
+    }
+    
+    /* Purpose & Solution Section */
+    .purpose-solution-section-overview {
+        padding: 100px 0;
+        background: white;
+    }
+    
+    .purpose-grid-overview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        gap: 3rem;
+        margin-top: 3rem;
+    }
+    
+    .purpose-card-overview {
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .purpose-card-overview:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+    
+    .purpose-card-header-overview {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+    
+    .purpose-icon-overview {
+        width: 70px;
+        height: 70px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        flex-shrink: 0;
+    }
+    
+    .purpose-icon-overview.purpose {
+        background: var(--primary-gradient);
+    }
+    
+    .purpose-icon-overview.solution {
+        background: var(--secondary-gradient);
+    }
+    
+    .purpose-title-overview {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--text-dark);
+        margin: 0;
+    }
+    
+    .purpose-description-overview {
+        color: var(--text-light);
+        line-height: 1.9;
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+    }
+    
+    .goals-list-overview {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        gap: 1rem;
+    }
+    
+    .goal-item-overview {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.25rem;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+    
+    .goal-item-overview:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .goal-number-overview {
+        width: 36px;
+        height: 36px;
+        background: var(--primary-gradient);
+        color: white;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 0.875rem;
+        flex-shrink: 0;
+    }
+    
+    .goal-text-overview {
+        color: var(--text-dark);
+        font-weight: 500;
+        line-height: 1.7;
+        flex: 1;
+    }
+    
+    .solution-features-overview {
+        display: grid;
+        gap: 1.5rem;
+    }
+    
+    .solution-feature-overview {
+        display: flex;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+    
+    .solution-feature-overview:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .solution-feature-icon-overview {
+        width: 50px;
+        height: 50px;
+        background: var(--secondary-gradient);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        flex-shrink: 0;
+    }
+    
+    .solution-feature-content-overview h5 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 0.5rem;
+    }
+    
+    .solution-feature-content-overview p {
+        color: var(--text-light);
+        line-height: 1.7;
+        margin: 0;
+    }
+    
+    /* CTA Section */
+    .overview-cta-section {
+        padding: 100px 0;
+        background: var(--bg-light);
+    }
+    
+    .overview-cta-card {
+        background: var(--primary-gradient);
+        border-radius: 30px;
+        padding: 4rem;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+        max-width: 800px;
+        margin: 0 auto;
+        color: white;
+    }
+    
+    .overview-cta-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: white;
+    }
+    
+    .overview-cta-description {
+        font-size: 1.125rem;
+        color: rgba(255, 255, 255, 0.95);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+    }
+    
+    .overview-cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 2.5rem;
+        background: white;
+        color: var(--accent-color);
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1.125rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+    
+    .overview-cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        color: var(--accent-color);
+    }
+    
+    .overview-cta-button svg {
+        transition: transform 0.3s ease;
+    }
+    
+    .overview-cta-button:hover svg {
+        transform: translateX(5px);
+    }
+    
+    @media (max-width: 992px) {
+        .page-hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .section-title-overview {
+            font-size: 2.25rem;
+        }
+        
+        .purpose-grid-overview {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .overview-hero-professional {
+            padding: 100px 0 60px;
+        }
+        
+        .overview-hero-title-professional {
+            font-size: 2.5rem;
+        }
+        
+        .overview-hero-description-professional {
+            font-size: 1.125rem;
+        }
+        
+        .overview-hero-metrics {
+            gap: 1rem;
+        }
+        
+        .metric-item-professional {
+            flex: 1;
+            min-width: 120px;
+            padding: 1.25rem 1.5rem;
+        }
+        
+        .metric-value {
+            font-size: 1.75rem;
+        }
+        
+        .security-feature-item {
+            padding: 1.5rem;
+        }
+        
+        .content-section {
+            padding: 60px 0;
+        }
+        
+        .section-title-overview {
+            font-size: 1.875rem;
+        }
+        
+        .problem-grid-overview {
+            grid-template-columns: 1fr;
+        }
+        
+        .intro-main-card-overview {
+            padding: 2rem;
+        }
+        
+        .intro-title-main-overview {
+            font-size: 2rem;
+        }
+        
+        .purpose-card-overview {
+            padding: 2rem;
+        }
+        
+        .overview-cta-card {
+            padding: 3rem 2rem;
+        }
+        
+        .overview-cta-title {
+            font-size: 2rem;
+        }
+    }
+    
+    /* ============================================
+       Professional Animations
+       ============================================ */
+    
+    /* Initial hidden state for animated elements */
+    .animate-on-scroll {
+        opacity: 0;
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Fade in from bottom */
+    .fade-in-up {
+        transform: translateY(40px);
+    }
+    
+    .fade-in-up.animated {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Fade in from left */
+    .fade-in-left {
+        transform: translateX(-40px);
+    }
+    
+    .fade-in-left.animated {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    /* Fade in from right */
+    .fade-in-right {
+        transform: translateX(40px);
+    }
+    
+    .fade-in-right.animated {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    /* Scale in animation */
+    .scale-in {
+        transform: scale(0.9);
+    }
+    
+    .scale-in.animated {
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    /* Hero section animations */
+    .overview-hero-badge-professional {
+        animation: fadeInDown 0.8s ease-out 0.2s both;
+    }
+    
+    .overview-hero-title-professional {
+        animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+    
+    .overview-hero-description-professional {
+        animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+    
+    .metric-item-professional {
+        animation: fadeInUp 0.6s ease-out both;
+    }
+    
+    .metric-item-professional:nth-child(1) {
+        animation-delay: 0.8s;
+    }
+    
+    .metric-item-professional:nth-child(2) {
+        animation-delay: 1s;
+    }
+    
+    .metric-item-professional:nth-child(3) {
+        animation-delay: 1.2s;
+    }
+    
+    .security-feature-item {
+        animation: slideInRight 0.6s ease-out both;
+    }
+    
+    .security-feature-item:nth-child(1) {
+        animation-delay: 0.8s;
+    }
+    
+    .security-feature-item:nth-child(2) {
+        animation-delay: 1s;
+    }
+    
+    .security-feature-item:nth-child(3) {
+        animation-delay: 1.2s;
+    }
+    
+    /* Keyframe animations */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+    }
+    
+    /* Floating animation for background */
+    .overview-hero-background {
+        animation: floatBackground 20s ease-in-out infinite;
+    }
+    
+    @keyframes floatBackground {
+        0%, 100% {
+            transform: translateY(0) translateX(0);
+        }
+        33% {
+            transform: translateY(-20px) translateX(10px);
+        }
+        66% {
+            transform: translateY(10px) translateX(-10px);
+        }
+    }
+    
+    /* Hover animations enhancement */
+    .problem-card-overview {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .problem-card-overview::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+    
+    .problem-card-overview:hover::before {
+        left: 100%;
+    }
+    
+    .purpose-card-overview {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .purpose-card-overview::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
+        transition: transform 0.6s ease;
+        transform: scale(0);
+    }
+    
+    .purpose-card-overview:hover::after {
+        transform: scale(1);
+    }
+    
+    /* Icon animations */
+    .problem-icon-overview,
+    .purpose-icon-overview,
+    .intro-icon-large-overview {
+        transition: transform 0.3s ease;
+    }
+    
+    .problem-card-overview:hover .problem-icon-overview,
+    .purpose-card-overview:hover .purpose-icon-overview {
+        transform: scale(1.1) rotate(5deg);
+    }
+    
+    /* Number counter animation */
+    .metric-value {
+        transition: transform 0.3s ease;
+    }
+    
+    .metric-item-professional:hover .metric-value {
+        transform: scale(1.1);
+    }
+    
+    /* Stagger animation for lists */
+    .goal-item-overview {
+        animation: fadeInLeft 0.5s ease-out both;
+    }
+    
+    .goal-item-overview:nth-child(1) { animation-delay: 0.1s; }
+    .goal-item-overview:nth-child(2) { animation-delay: 0.2s; }
+    .goal-item-overview:nth-child(3) { animation-delay: 0.3s; }
+    .goal-item-overview:nth-child(4) { animation-delay: 0.4s; }
+    .goal-item-overview:nth-child(5) { animation-delay: 0.5s; }
+    .goal-item-overview:nth-child(6) { animation-delay: 0.6s; }
+    .goal-item-overview:nth-child(7) { animation-delay: 0.7s; }
+    
+    .solution-feature-overview {
+        animation: fadeInRight 0.5s ease-out both;
+    }
+    
+    .solution-feature-overview:nth-child(1) { animation-delay: 0.1s; }
+    .solution-feature-overview:nth-child(2) { animation-delay: 0.2s; }
+    .solution-feature-overview:nth-child(3) { animation-delay: 0.3s; }
+    
+    /* CTA card animation */
+    .overview-cta-card {
+        animation: scaleIn 0.8s ease-out both;
+        animation-delay: 0.3s;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section - Professional Security Design -->
+<section class="overview-hero-professional">
+    <div class="overview-hero-background"></div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <div class="overview-hero-content-professional">
+                    <div class="overview-hero-badge-professional">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                            <path d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.304.144.531.208.8.208s.496-.064.8-.208c.304-.143.662-.352 1.048-.625a11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0z"/>
+                        </svg>
+                        <span>Enterprise Security Solution</span>
+                    </div>
+                    <h1 class="overview-hero-title-professional">
+                        Project <span class="highlight-text">Overview</span>
+                    </h1>
+                    <p class="overview-hero-description-professional">
+                        A comprehensive examination of our AI-powered threat detection system, designed to enhance security infrastructure through intelligent automation, real-time monitoring, and advanced machine learning capabilities.
+                    </p>
+                    <div class="overview-hero-metrics">
+                        <div class="metric-item-professional">
+                            <div class="metric-value">10,000+</div>
+                            <div class="metric-label">Training Images</div>
+                        </div>
+                        <div class="metric-item-professional">
+                            <div class="metric-value">96.7%</div>
+                            <div class="metric-label">Accuracy Rate</div>
+                        </div>
+                        <div class="metric-item-professional">
+                            <div class="metric-value">45 FPS</div>
+                            <div class="metric-label">Processing Speed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="overview-hero-visual-professional">
+                    <div class="security-feature-grid">
+                        <div class="security-feature-item">
+                            <div class="security-feature-icon">
+                                <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                            </div>
+                            <div class="security-feature-content">
+                                <div class="security-feature-title">Real-time Protection</div>
+                                <div class="security-feature-desc">Continuous monitoring</div>
+                            </div>
+                        </div>
+                        <div class="security-feature-item">
+                            <div class="security-feature-icon">
+                                <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <div class="security-feature-content">
+                                <div class="security-feature-title">Instant Alerts</div>
+                                <div class="security-feature-desc">Immediate notifications</div>
+                            </div>
+                        </div>
+                        <div class="security-feature-item">
+                            <div class="security-feature-icon">
+                                <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <div class="security-feature-content">
+                                <div class="security-feature-title">High Accuracy</div>
+                                <div class="security-feature-desc">Precision detection</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Challenges Section -->
+<section class="content-section">
+    <div class="container">
+        <div class="section-header-overview animate-on-scroll fade-in-up">
+            <div class="section-label-overview">The Challenge</div>
+            <h2 class="section-title-overview">Why Traditional Security Falls Short</h2>
+            <p class="section-description-overview">
+                Current security systems face critical limitations that compromise public safety. Our AI solution addresses these fundamental gaps.
+            </p>
+        </div>
+        <div class="problem-grid-overview">
+            <div class="problem-card-overview animate-on-scroll fade-in-up">
+                <div class="problem-icon-overview">
+                    <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+                <h4 class="problem-title-overview">Human Limitations</h4>
+                <p class="problem-text-overview">
+                    Security personnel experience fatigue, lose focus during long shifts, and miss critical moments. Studies show attention spans decrease significantly after just 20 minutes of continuous monitoring.
+                </p>
+            </div>
+            <div class="problem-card-overview animate-on-scroll fade-in-up">
+                <div class="problem-icon-overview">
+                    <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h4 class="problem-title-overview">Slow Response Times</h4>
+                <p class="problem-text-overview">
+                    Manual monitoring creates dangerous delays. By the time security personnel notice and respond to a threat, incidents may have already escalated, putting lives at risk.
+                </p>
+            </div>
+            <div class="problem-card-overview animate-on-scroll fade-in-up">
+                <div class="problem-icon-overview">
+                    <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+                <h4 class="problem-title-overview">High False Alarm Rates</h4>
+                <p class="problem-text-overview">
+                    Traditional systems struggle to distinguish between actual threats and harmless objects like phones, water bottles, or tools. This causes unnecessary panic and wastes valuable security resources.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Introduction Section -->
+<section class="intro-section-overview">
+    <div class="container">
+        <div class="intro-main-card-overview animate-on-scroll scale-in">
+            <div class="intro-header-overview">
+                <div class="intro-icon-large-overview">
+                    <svg width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                </div>
+                <h2 class="intro-title-main-overview">Revolutionary Security Technology</h2>
+            </div>
+            <p class="intro-text-content-overview">
+                Our <strong>Threat Detection System</strong> represents a paradigm shift in security monitoring. Leveraging state-of-the-art deep learning algorithms, we've created an intelligent solution that transforms how we protect public spaces. Unlike traditional systems that depend on human vigilance, our AI-powered platform provides continuous, accurate threat detection without the limitations of human fatigue or distraction.
+            </p>
+            <p class="intro-text-content-overview">
+                The system seamlessly integrates with existing CCTV infrastructure, analyzing video streams in real-time to identify weapons and suspicious objects. When a potential threat is detected, security personnel receive instant, actionable alerts, enabling rapid response to prevent incidents before they escalate into dangerous situations.
+            </p>
+            <div class="intro-features-grid-overview">
+                <div class="intro-feature-box-overview animate-on-scroll fade-in-left">
+                    <div class="intro-feature-icon-overview">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="intro-feature-text-overview">Works with existing camera systems</span>
+                </div>
+                <div class="intro-feature-box-overview animate-on-scroll fade-in-left">
+                    <div class="intro-feature-icon-overview">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="intro-feature-text-overview">No human fatigue or attention lapses</span>
+                </div>
+                <div class="intro-feature-box-overview animate-on-scroll fade-in-left">
+                    <div class="intro-feature-icon-overview">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="intro-feature-text-overview">Accurate detection in various conditions</span>
+                </div>
+                <div class="intro-feature-box-overview animate-on-scroll fade-in-left">
+                    <div class="intro-feature-icon-overview">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="intro-feature-text-overview">24/7 continuous monitoring capability</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Purpose & Solution Section -->
+<section class="purpose-solution-section-overview">
+    <div class="container">
+        <div class="section-header-overview animate-on-scroll fade-in-up">
+            <div class="section-label-overview">Our Mission</div>
+            <h2 class="section-title-overview">Project Purpose & Solution</h2>
+            <p class="section-description-overview">
+                Building a safer future through intelligent automation and advanced AI technology
+            </p>
+        </div>
+        <div class="purpose-grid-overview">
+            <div class="purpose-card-overview animate-on-scroll fade-in-left">
+                <div class="purpose-card-header-overview">
+                    <div class="purpose-icon-overview purpose">
+                        <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="purpose-title-overview">Project Purpose</h3>
+                </div>
+                <p class="purpose-description-overview">
+                    Our mission is to create an intelligent threat detection system that enhances security in schools, transportation hubs, and public spaces. By leveraging machine learning, we support security personnel with automated monitoring that never tires and never misses a threat.
+                </p>
+                <h5 class="mt-4 mb-3" style="font-weight: 700; color: var(--text-dark);">Key Objectives:</h5>
+                <ul class="goals-list-overview">
+                    <li class="goal-item-overview animate-on-scroll fade-in-left">
+                        <div class="goal-number-overview">1</div>
+                        <div class="goal-text-overview">Detect threats in live video streams in real-time</div>
+                    </li>
+                    <li class="goal-item-overview animate-on-scroll fade-in-left">
+                        <div class="goal-number-overview">2</div>
+                        <div class="goal-text-overview">Generate instant alerts and notify security teams immediately</div>
+                    </li>
+                    <li class="goal-item-overview animate-on-scroll fade-in-left">
+                        <div class="goal-number-overview">3</div>
+                        <div class="goal-text-overview">Dramatically reduce human monitoring errors</div>
+                    </li>
+                    <li class="goal-item-overview animate-on-scroll fade-in-left">
+                        <div class="goal-number-overview">4</div>
+                        <div class="goal-text-overview">Minimize false alarms through advanced AI training</div>
+                    </li>
+                    <li class="goal-item-overview animate-on-scroll fade-in-left">
+                        <div class="goal-number-overview">5</div>
+                        <div class="goal-text-overview">Seamless integration with existing infrastructure</div>
+                    </li>
+                    <li class="goal-item-overview animate-on-scroll fade-in-left">
+                        <div class="goal-number-overview">6</div>
+                        <div class="goal-text-overview">Enable faster decision-making for security staff</div>
+                    </li>
+                    <li class="goal-item-overview animate-on-scroll fade-in-left">
+                        <div class="goal-number-overview">7</div>
+                        <div class="goal-text-overview">Provide hands-on learning in AI and security</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="purpose-card-overview animate-on-scroll fade-in-right">
+                <div class="purpose-card-header-overview">
+                    <div class="purpose-icon-overview solution">
+                        <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="purpose-title-overview">Our Solution</h3>
+                </div>
+                <p class="purpose-description-overview">
+                    Our AI-powered system automatically analyzes every frame of video footage, identifying potential threats with high accuracy. When suspicious objects are detected, instant alerts are sent to security personnel, enabling rapid response to prevent incidents.
+                </p>
+                <div class="solution-features-overview">
+                    <div class="solution-feature-overview animate-on-scroll fade-in-right">
+                        <div class="solution-feature-icon-overview">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <div class="solution-feature-content-overview">
+                            <h5>Advanced CNN Technology</h5>
+                            <p>Trained on thousands of diverse images to recognize threats in various conditions, angles, and lighting scenarios.</p>
+                        </div>
+                    </div>
+                    <div class="solution-feature-overview animate-on-scroll fade-in-right">
+                        <div class="solution-feature-icon-overview">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="solution-feature-content-overview">
+                            <h5>Lightning-Fast Processing</h5>
+                            <p>Real-time analysis ensures threats are detected and alerts sent within milliseconds of detection.</p>
+                        </div>
+                    </div>
+                    <div class="solution-feature-overview animate-on-scroll fade-in-right">
+                        <div class="solution-feature-icon-overview">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="solution-feature-content-overview">
+                            <h5>24/7 Reliability</h5>
+                            <p>Unlike human monitors, our system never gets tired, never loses focus, and maintains consistent performance around the clock.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="overview-cta-section">
+    <div class="container">
+        <div class="overview-cta-card animate-on-scroll scale-in">
+            <h2 class="overview-cta-title">Ready to See It in Action?</h2>
+            <p class="overview-cta-description">
+                Experience the power of AI-driven threat detection firsthand. Try our live demo and see how our system can protect your space.
+            </p>
+            <a href="/demo" class="overview-cta-button">
+                <span>Try Live Demo</span>
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Professional Scroll Animations
+    document.addEventListener('DOMContentLoaded', function() {
+        // Intersection Observer for scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    // Stop observing once animated
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Stagger animation for problem cards
+        const problemCards = document.querySelectorAll('.problem-card-overview');
+        problemCards.forEach((card, index) => {
+            if (card.classList.contains('animate-on-scroll')) {
+                card.style.transitionDelay = `${index * 0.1}s`;
+            }
+        });
+
+        // Number counter animation for metrics
+        const metricValues = document.querySelectorAll('.metric-value');
+        const animateCounter = (element, target, duration = 2000) => {
+            const start = 0;
+            let current = start;
+            const isPercentage = target.toString().includes('%');
+            const isPlus = target.toString().includes('+');
+            const isFPS = target.toString().includes('FPS');
+            const num = parseFloat(target.toString().replace(/[^0-9.]/g, ''));
+            const increment = num / (duration / 16);
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < num) {
+                    if (isPlus) {
+                        element.textContent = Math.floor(current) + '+';
+                    } else if (isPercentage) {
+                        element.textContent = current.toFixed(1) + '%';
+                    } else if (isFPS) {
+                        element.textContent = Math.floor(current) + ' FPS';
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            };
+
+            // Start animation when element is visible
+            const metricObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        updateCounter();
+                        metricObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            metricObserver.observe(element);
+        };
+
+        // Initialize counters
+        metricValues.forEach(metric => {
+            const text = metric.textContent.trim();
+            if (text.includes('+')) {
+                const num = parseInt(text.replace('+', ''));
+                metric.textContent = '0+';
+                animateCounter(metric, num + '+');
+            } else if (text.includes('%')) {
+                const num = parseFloat(text.replace('%', ''));
+                metric.textContent = '0.0%';
+                animateCounter(metric, num.toFixed(1) + '%');
+            } else if (text.includes('FPS')) {
+                const num = parseInt(text.replace(' FPS', ''));
+                metric.textContent = '0 FPS';
+                animateCounter(metric, num + ' FPS');
+            }
+        });
+
+        // Parallax effect for hero background
+        let lastScroll = 0;
+        const heroBackground = document.querySelector('.overview-hero-background');
+        
+        if (heroBackground) {
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                if (scrollY < window.innerHeight) {
+                    heroBackground.style.transform = `translateY(${scrollY * 0.3}px)`;
+                }
+            });
+        }
+
+        // Smooth reveal for feature boxes
+        const featureBoxes = document.querySelectorAll('.intro-feature-box-overview');
+        featureBoxes.forEach((box, index) => {
+            box.style.opacity = '0';
+            box.style.transform = 'translateX(-20px)';
+            box.style.transition = `all 0.6s ease ${index * 0.1}s`;
+        });
+
+        const featureObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                    featureObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        featureBoxes.forEach(box => featureObserver.observe(box));
+    });
+</script>
+{% endblock %}

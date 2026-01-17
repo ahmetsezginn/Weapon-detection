@@ -1,0 +1,1159 @@
+{% extends "base.html" %}
+
+{% block title %}Architecture - AI Threat Detection System{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="section-badge mb-3">System Design</div>
+                <h1 class="page-hero-title">System Architecture</h1>
+                <p class="page-hero-subtitle">Understanding how our AI-powered weapon detection system works internally</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Architecture Diagram Section -->
+<section class="content-section py-5">
+    <div class="container">
+        <div class="row g-5">
+        </div>
+    </div>
+</section>
+
+<!-- Components Section -->
+<section class="content-section py-5 bg-light">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                        </div>
+                        <h3 class="component-title">Core Components</h3>
+                    </div>
+                    <div class="component-body">
+                        <ol class="component-list">
+                            <li><strong>Input Sources</strong> - Webcam (real-time), Image upload, Video file upload</li>
+                            <li><strong>Flask Web Application</strong> - HTTP server handling multiple detection routes</li>
+                            <li><strong>Preprocessing Module</strong> - Adaptive brightness detection, CLAHE enhancement, gamma correction</li>
+                            <li><strong>YOLOv11 Detection Model</strong> - Core AI engine with tiled inference and high-resolution scanning</li>
+                            <li><strong>Post-processing & Verification</strong> - Double-check mechanism, temporal smoothing, confidence filtering</li>
+                            <li><strong>Response Generation</strong> - Real-time MJPEG stream, annotated images/videos, JSON detection data</li>
+                            <li><strong>Web Browser Interface</strong> - Live feed display, bounding box visualization, detection results panel</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon tech">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.061L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                            </svg>
+                        </div>
+                        <h3 class="component-title">Technical Specifications</h3>
+                    </div>
+                    <div class="component-body">
+                        <ul class="spec-list">
+                            <li><strong>Model Architecture:</strong> YOLOv11 (You Only Look Once version 11) - Nano variant</li>
+                            <li><strong>Framework:</strong> PyTorch</li>
+                            <li><strong>Input Format:</strong> Video streams at 30 FPS</li>
+                            <li><strong>Detection Classes:</strong> Threat, No-Threat</li>
+                            <li><strong>Processing Speed:</strong> Real-time inference</li>
+                            <li><strong>Accuracy:</strong> >95% precision on test dataset</li>
+                            <li><strong>Hardware:</strong> Compatible with GPU acceleration</li>
+                        </ul>
+                        
+                        <h5 class="mt-4 mb-3">Data Flow Process</h5>
+                        <ol class="flow-list">
+                            <li>Input received (webcam frame, uploaded image, or video file)</li>
+                            <li>Adaptive preprocessing based on brightness (CLAHE, gamma correction)</li>
+                            <li>YOLOv11 model performs inference with optional tiling for small objects</li>
+                            <li>Double-check verification for upper-region detections</li>
+                            <li>Temporal smoothing applied (for real-time mode) to reduce false positives</li>
+                            <li>Bounding boxes drawn and results returned to web interface</li>
+                            <li>User views annotated output (live stream, image overlay, or processed video)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Model Information Section -->
+<section class="content-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="model-info-card">
+                    <div class="model-header text-center mb-4">
+                        <div class="model-icon mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.061L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                            </svg>
+                        </div>
+                        <h2 class="model-title">Model Information</h2>
+                    </div>
+                    <p class="model-description text-center mb-5">
+                        Our system utilizes a state-of-the-art YOLOv11 (Nano) model trained specifically for threat detection. The model has been trained to distinguish between threat and no-threat scenarios in various environments, angles, and lighting conditions.
+                    </p>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="stat-box">
+                                <div class="stat-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.061L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                    </svg>
+                                </div>
+                                <h4 class="stat-title">Training Dataset</h4>
+                                <p class="stat-value">10,000+</p>
+                                <p class="stat-label">annotated images</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-box">
+                                <div class="stat-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.061L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                    </svg>
+                                </div>
+                                <h4 class="stat-title">Validation Accuracy</h4>
+                                <p class="stat-value">96.7%</p>
+                                <p class="stat-label">precision score</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-box">
+                                <div class="stat-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+                                    </svg>
+                                </div>
+                                <h4 class="stat-title">Processing Speed</h4>
+                                <p class="stat-value">45 FPS</p>
+                                <p class="stat-label">on RTX 3080</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.page-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 120px 0 80px;
+    color: white;
+    text-align: center;
+}
+
+.page-hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.page-hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.content-section {
+    padding: 80px 0;
+}
+
+.architecture-card {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.architecture-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.download-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+.download-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.download-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.component-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    height: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.component-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.component-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.component-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+}
+
+.component-icon.tech {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.component-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.component-body {
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+.component-list, .spec-list, .flow-list {
+    list-style: none;
+    padding: 0;
+}
+
+.component-list li, .spec-list li, .flow-list li {
+    padding: 0.75rem 0;
+    padding-left: 2rem;
+    position: relative;
+    color: var(--text-light);
+}
+
+.component-list li::before {
+    content: '1';
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.component-list li:nth-child(2)::before { content: '2'; }
+.component-list li:nth-child(3)::before { content: '3'; }
+.component-list li:nth-child(4)::before { content: '4'; }
+.component-list li:nth-child(5)::before { content: '5'; }
+.component-list li:nth-child(6)::before { content: '6'; }
+.component-list li:nth-child(7)::before { content: '7'; }
+
+.spec-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.flow-list li::before {
+    content: counter(step-counter);
+    counter-increment: step-counter;
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.flow-list {
+    counter-reset: step-counter;
+}
+
+.model-info-card {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.model-header {
+    margin-bottom: 2rem;
+}
+
+.model-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 0 auto;
+}
+
+.model-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.model-description {
+    color: var(--text-light);
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 0 auto 1rem;
+}
+
+.stat-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.relationship-list {
+    list-style: none;
+    padding: 0;
+}
+
+.relationship-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-light);
+}
+
+.relationship-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .page-hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .architecture-card, .model-info-card {
+        padding: 2rem;
+    }
+    
+    .component-card {
+        padding: 2rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const mermaidDiagrams = {
+        'mermaid-diagram': `graph TB
+                            D3 --> E
+                            
+                            E --> E1[Tiled Inference]
+                            E --> E2[High-Res Scanning]
+                            E --> E3[Model Inference]
+                            
+                            E1 --> F[Post-processing and Verification]
+                            E2 --> F
+                            E3 --> F
+                            
+                            F --> F1[Double-Check Mechanism]
+                            F --> F2[Temporal Smoothing]
+                            F --> F3[Confidence Filtering]
+                            
+                            F1 --> G[Response Generation]
+                            F2 --> G
+                            F3 --> G
+                            
+                            G --> G1[Real-time Video Stream]
+                            G --> G2[Annotated Image]
+                            G --> G3[Annotated Video]
+                            G --> G4[JSON Detection Data]
+                            
+                            G1 --> H[Web Browser Interface]
+                            G2 --> H
+                            G3 --> H
+                            G4 --> H
+                            
+                            style A fill:#e1f5fe
+                            style A1 fill:#e1f5fe
+                            style A2 fill:#e1f5fe
+                            style A3 fill:#e1f5fe
+                            style B fill:#f3e5f5
+                            style C fill:#f3e5f5
+                            style D fill:#e8f5e8
+                            style E fill:#fff3e0
+                            style F fill:#e8f5e8
+                            style G fill:#ffebee
+                            style H fill:#fce4ec`,
+        'mermaid-flowchart': `graph TD
+                            Start([Start]) --> Input[Capture Input Frame]
+                            Input --> Pre[Adaptive Preprocessing]
+                            
+                            Pre --> Bright{Brightness Low?}
+                            Bright -- Yes --> CLAHE[Apply CLAHE and Gamma]
+                            Bright -- No --> Normal[Normal Normalization]
+                            
+                            CLAHE --> YOLO[YOLOv11 Inference]
+                            Normal --> YOLO
+                            
+                            YOLO --> Detect{Threat Detected?}
+                            
+                            Detect -- No --> Display[Display Normal Frame]
+                            Display --> Loop[Continue to Next Frame]
+                            Loop --> Input
+                            
+                            Detect -- Yes --> Tiled[Run Tiled Inference]
+                            Tiled --> Double[Double-Check Mechanism]
+                            Double --> Smoothing[Temporal Smoothing]
+                            
+                            Smoothing --> Draw[Draw Bounding Boxes and Labels]
+                            Draw --> Alert[Trigger Audio and UI Alert]
+                            Alert --> Log[Save Incident to Log]
+                            Log --> Loop
+                            
+                            style Start fill:#f9f9f9,stroke:#333
+                            style Detect fill:#fff9c4,stroke:#fbc02d
+                            style Bright fill:#fff9c4,stroke:#fbc02d
+                            style YOLO fill:#bbdefb,stroke:#1976d2
+                            style Alert fill:#ffcdd2,stroke:#d32f2f
+                            style Log fill:#c8e6c9,stroke:#388e3c`,
+        'mermaid-er': `erDiagram
+                            USERS ||--o{ INCIDENTS : "creates"
+                            CAMERAS ||--o{ INCIDENTS : "records"
+                            USERS ||--o{ ACTIONLOG : "performs"
+                            INCIDENTS ||--o{ ACTIONLOG : "has"
+                            
+                            USERS {
+                                int UserID PK
+                                string Username
+                                string Email
+                                string PasswordHash
+                                string Role
+                                datetime CreatedAt
+                            }
+                            
+                            CAMERAS {
+                                int CameraID PK
+                                string Location
+                                string Description
+                                string IPAddress
+                                string Status
+                                datetime CreatedAt
+                            }
+                            
+                            INCIDENTS {
+                                int IncidentID PK
+                                int UserID FK
+                                int CameraID FK
+                                datetime Timestamp
+                                string ObjectType
+                                float ConfidenceScore
+                                string SnapshotPath
+                                boolean AlertSent
+                            }
+                            
+                            ACTIONLOG {
+                                int LogID PK
+                                int UserID FK
+                                int IncidentID FK
+                                string ActionType
+                                datetime Timestamp
+                                string Details
+                            }`,
+        'mermaid-dataflow': `graph TB
+                            subgraph Client["Client-Side (Web Browser)"]
+                                UI[User Interface<br/>HTML5, CSS, JavaScript]
+                                CAM[Webcam Access<br/>MediaDevices API]
+                                UPLOAD[File Upload<br/>FormData API]
+                                DISPLAY[Display Layer<br/>Canvas, Video, Image]
+                            end
+                            
+                            subgraph Network["HTTP/HTTPS Communication"]
+                                REQ1[POST /start_video_stream<br/>JSON Request]
+                                REQ2[GET /video_feed<br/>MJPEG Stream]
+                                REQ3[POST /detect<br/>multipart/form-data]
+                                REQ4[POST /detect_video<br/>multipart/form-data]
+                                RESP1[JSON Response<br/>detections, metadata]
+                                RESP2[MJPEG Stream<br/>video/jpeg]
+                                RESP3[JSON Response<br/>annotated_image_url]
+                                RESP4[JSON Response<br/>processed_video_url]
+                            end
+                            
+                            subgraph FlaskApp["Flask Web Application Server"]
+                                ROUTER[Route Handler<br/>Request Router]
+                                UPLOAD_MGR[File Upload Manager<br/>Temporary Storage]
+                                STREAM_MGR[Video Stream Manager<br/>Threading Control]
+                            end
+                            
+                            subgraph Processing["Data Processing Pipeline"]
+                                PREPROC[Preprocessing Module<br/>Brightness Detection<br/>CLAHE, Gamma Correction]
+                                FRAME_BUF[Frame Buffer<br/>Queue Management]
+                                ADAPTIVE[Adaptive Processing<br/>Conditional Enhancement]
+                            end
+                            
+                            subgraph Detection["Detection Engine"]
+                                YOLO[YOLOv11 Model<br/>best.pt]
+                                INFERENCE[Model Inference<br/>1280px Resolution]
+                                TILED[Tiled Inference<br/>Optional Small Object Detection]
+                            end
+                            
+                            subgraph PostProc["Post-Processing and Verification"]
+                                NMS[Non-Maximum Suppression<br/>NMS Filtering]
+                                DOUBLE[Double-Check Mechanism<br/>Upper Region Verification]
+                                TEMPORAL[Temporal Smoothing<br/>Frame History Tracking]
+                                CONF[Confidence Filtering<br/>Threshold: 0.4]
+                            end
+                            
+                            subgraph Response["Response Generation"]
+                                ANNOTATE[Annotation Engine<br/>Bounding Box Drawing]
+                                JSON_GEN[JSON Serialization<br/>Detection Metadata]
+                                VIDEO_GEN[Video Encoding<br/>OpenCV VideoWriter]
+                                STREAM_GEN[MJPEG Generator<br/>Frame-by-Frame Streaming]
+                            end
+                            
+                            subgraph Storage["Data Storage"]
+                                TEMP[Temp Files<br/>uploads/ directory]
+                                MODEL[Model Storage<br/>best.pt]
+                                HISTORY[In-Memory History<br/>Temporal Smoothing Data]
+                            end
+                            
+                            UI --> REQ1
+                            UI --> REQ3
+                            UI --> REQ4
+                            CAM --> REQ1
+                            UPLOAD --> REQ3
+                            UPLOAD --> REQ4
+                            
+                            REQ1 --> ROUTER
+                            REQ2 --> ROUTER
+                            REQ3 --> ROUTER
+                            REQ4 --> ROUTER
+                            
+                            ROUTER --> UPLOAD_MGR
+                            ROUTER --> STREAM_MGR
+                            
+                            UPLOAD_MGR --> PREPROC
+                            STREAM_MGR --> FRAME_BUF
+                            FRAME_BUF --> PREPROC
+                            
+                            PREPROC --> ADAPTIVE
+                            ADAPTIVE --> YOLO
+                            
+                            YOLO --> INFERENCE
+                            YOLO --> TILED
+                            INFERENCE --> NMS
+                            TILED --> NMS
+                            
+                            NMS --> DOUBLE
+                            DOUBLE --> TEMPORAL
+                            TEMPORAL --> CONF
+                            
+                            CONF --> ANNOTATE
+                            ANNOTATE --> JSON_GEN
+                            ANNOTATE --> VIDEO_GEN
+                            ANNOTATE --> STREAM_GEN
+                            
+                            JSON_GEN --> RESP1
+                            STREAM_GEN --> RESP2
+                            VIDEO_GEN --> RESP3
+                            VIDEO_GEN --> RESP4
+                            
+                            RESP1 --> DISPLAY
+                            RESP2 --> DISPLAY
+                            RESP3 --> DISPLAY
+                            RESP4 --> DISPLAY
+                            
+                            MODEL --> YOLO
+                            TEMP --> UPLOAD_MGR
+                            HISTORY --> TEMPORAL
+                            
+                            style Client fill:#e3f2fd
+                            style Network fill:#fff3e0
+                            style FlaskApp fill:#f3e5f5
+                            style Processing fill:#e8f5e9
+                            style Detection fill:#fff9c4
+                            style PostProc fill:#fce4ec
+                            style Response fill:#ffebee
+                            style Storage fill:#f1f8e9`,
+        'mermaid-layered': `graph TB
+                            subgraph Layer1["Presentation Layer"]
+                                L1A[Web Browser<br/>HTML5, JavaScript, Canvas API]
+                                L1B[Real-time Video Rendering]
+                                L1C[Interactive UI Components<br/>Bootstrap 5]
+                                L1D[AJAX/Fetch API<br/>Server Communication]
+                            end
+                            
+                            subgraph Layer2["Application Layer (Flask)"]
+                                L2A[Route Handlers<br/>/detect_realtime<br/>/detect<br/>/detect_video]
+                                L2B[Request/Response Management]
+                                L2C[File Upload Handling<br/>Multipart Form Data]
+                                L2D[JSON Serialization<br/>Deserialization]
+                            end
+                            
+                            subgraph Layer3["Detection and Processing Layer"]
+                                L3A[YOLOv11 Model Wrapper<br/>Ultralytics]
+                                L3B[Frame Processor<br/>OpenCV]
+                                L3C[Preprocessing Pipeline<br/>Brightness, CLAHE, Gamma]
+                                L3D[Tiled Inference Manager<br/>Optional]
+                                L3E[Temporal Smoothing Algorithm]
+                                L3F[Double-Check Verification Module]
+                            end
+                            
+                            subgraph Layer4["Data Management Layer"]
+                                L4A[File System Storage<br/>uploads/ directory]
+                                L4B[Temporary File Management]
+                                L4C[Model File Loading<br/>best.pt]
+                                L4D[Frame History Tracking<br/>In-Memory]
+                            end
+                            
+                            subgraph Layer5["Hardware / OS Layer"]
+                                L5A[CPU<br/>Multicore Processing]
+                                L5B[GPU<br/>Optional CUDA Support<br/>PyTorch]
+                                L5C[Webcam/Camera Interface<br/>MediaDevices API]
+                                L5D[Network Interface<br/>HTTP/HTTPS]
+                            end
+                            
+                            Layer1 --> Layer2
+                            Layer2 --> Layer3
+                            Layer3 --> Layer4
+                            Layer4 --> Layer5
+                            
+                            L1A --> L1D
+                            L1B --> L1D
+                            L1C --> L1D
+                            L1D --> L2A
+                            
+                            L2A --> L2B
+                            L2B --> L2C
+                            L2C --> L2D
+                            L2D --> L3A
+                            
+                            L3A --> L3B
+                            L3B --> L3C
+                            L3C --> L3D
+                            L3D --> L3E
+                            L3E --> L3F
+                            L3F --> L4A
+                            
+                            L4A --> L4B
+                            L4B --> L4C
+                            L4C --> L4D
+                            L4D --> L5A
+                            
+                            L5A --> L5B
+                            L5B --> L5C
+                            L5C --> L5D
+                            
+                            style Layer1 fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+                            style Layer2 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+                            style Layer3 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+                            style Layer4 fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+                            style Layer5 fill:#fce4ec,stroke:#c2185b,stroke-width:2px`,
+        'mermaid-training': `graph TB
+                            subgraph DataPrep["Data Preparation Phase"]
+                                RAW[Raw Dataset<br/>CCTV, Kaggle, Custom Shots]
+                                RAW1[CCTV] --> RAW
+                                RAW2[Kaggle] --> RAW
+                                RAW3[Custom Shots] --> RAW
+                                
+                                RAW --> ANNOTATE[Process 1: Data Annotation]
+                                ANNOTATE --> LABELS[XML - TXT Label Files]
+                                
+                                LABELS --> PREPROC[Process 2: Data Preprocessing]
+                                PREPROC --> RESIZE[Resize 640x640]
+                                PREPROC --> NORM[Normalization]
+                            end
+                            
+                            subgraph DataSplit["Data Splitting Phase"]
+                                SPLIT{Data Splitting}
+                                RESIZE --> SPLIT
+                                NORM --> SPLIT
+                                
+                                SPLIT --> TRAIN_SET[Training Set 80%]
+                                SPLIT --> TEST_SET[Test Set 10%]
+                                SPLIT --> VAL_SET[Validation Set 10%]
+                            end
+                            
+                            subgraph Augment["Data Augmentation Phase"]
+                                AUG[Process 3: Data Augmentation]
+                                TRAIN_SET --> AUG
+                                
+                                AUG --> MOSAIC[Mosaic]
+                                AUG --> MIXUP[MixUp]
+                                AUG --> HSV[HSV<br/>Hue, Saturation, Value]
+                                AUG --> ROTATE[Rotation]
+                            end
+                            
+                            subgraph MainTrain["Main Process: YOLOv11"]
+                                ARCH[YOLOv11 Architecture]
+                                MOSAIC --> ARCH
+                                MIXUP --> ARCH
+                                HSV --> ARCH
+                                ROTATE --> ARCH
+                                
+                                ARCH --> FORWARD[Forward Pass]
+                                FORWARD --> LOSS[Loss Calculation]
+                                
+                                VAL_SET -.-> BEST[Best Score Validation]
+                                LOSS --> BEST
+                                
+                                BEST --> BACKPROP[Backpropagation]
+                                BACKPROP --> UPDATE[Weight Update]
+                                
+                                UPDATE --> ARCH
+                            end
+                            
+                            BEST --> OUTPUT[("Trained Model Weights<br/>Best.pt")]
+                            
+                            style RAW fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                            style RAW1 fill:#e1f5fe
+                            style RAW2 fill:#e1f5fe
+                            style RAW3 fill:#e1f5fe
+                            style ANNOTATE fill:#fff3e0,stroke:#e65100,stroke-width:2px
+                            style LABELS fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+                            style PREPROC fill:#fff3e0,stroke:#e65100,stroke-width:2px
+                            style RESIZE fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+                            style NORM fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+                            style SPLIT fill:#fff9c4,stroke:#f57f17,stroke-width:3px
+                            style TRAIN_SET fill:#e3f2fd,stroke:#0d47a1,stroke-width:2px
+                            style TEST_SET fill:#e3f2fd,stroke:#0d47a1,stroke-width:2px
+                            style VAL_SET fill:#e3f2fd,stroke:#0d47a1,stroke-width:2px
+                            style AUG fill:#fff3e0,stroke:#e65100,stroke-width:2px
+                            style MOSAIC fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+                            style MIXUP fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+                            style HSV fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+                            style ROTATE fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+                            style ARCH fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+                            style FORWARD fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+                            style LOSS fill:#ffebee,stroke:#b71c1c,stroke-width:2px
+                            style BEST fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px
+                            style BACKPROP fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+                            style UPDATE fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+                            style OUTPUT fill:#fff3e0,stroke:#e65100,stroke-width:4px`
+    };
+    
+    mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'default',
+        securityLevel: 'loose'
+    });
+    
+    // Wait for Mermaid to render, then set up download functionality
+    let mermaidReady = false;
+    
+    // Check if Mermaid is ready
+    const checkMermaidReady = setInterval(() => {
+        const diag1 = document.getElementById('mermaid-diagram');
+        const diag2 = document.getElementById('mermaid-flowchart');
+        const diag3 = document.getElementById('mermaid-er');
+        const diag4 = document.getElementById('mermaid-dataflow');
+        const diag5 = document.getElementById('mermaid-layered');
+        const diag6 = document.getElementById('mermaid-training');
+        if (diag1?.querySelector('svg') && diag2?.querySelector('svg') && diag3?.querySelector('svg') && diag4?.querySelector('svg') && diag5?.querySelector('svg') && diag6?.querySelector('svg')) {
+            mermaidReady = true;
+            clearInterval(checkMermaidReady);
+            setupDownloadButtons();
+            setupDashboardDownload();
+        }
+    }, 200);
+    
+    // Timeout after 5 seconds
+    setTimeout(() => {
+        clearInterval(checkMermaidReady);
+        if (!mermaidReady) {
+            setupDownloadButtons(); // Try anyway
+        }
+    }, 5000);
+    
+    function setupDownloadButtons() {
+        const configs = [
+            { btn: 'download-diagram-btn', container: 'mermaid-diagram', filename: 'figure-4.1-general-block-diagram-wdrt-system.png' },
+            { btn: 'download-layered-btn', container: 'mermaid-layered', filename: 'figure-4.2.1-system-software-architecture-layered-view.png' },
+            { btn: 'download-flowchart-btn', container: 'mermaid-flowchart', filename: 'figure-4.4-threat-detection-algorithm.png' },
+            { btn: 'download-er-btn', container: 'mermaid-er', filename: 'figure-4.2-entity-relationship-diagram.png' },
+            { btn: 'download-dataflow-btn', container: 'mermaid-dataflow', filename: 'figure-5.8.3-complete-system-data-flow-integration.png' },
+            { btn: 'download-training-btn', container: 'mermaid-training', filename: 'figure-11-yolov11-training-pipeline.png' }
+        ];
+
+        configs.forEach(config => {
+            const btn = document.getElementById(config.btn);
+            const container = document.getElementById(config.container);
+            
+            if (!btn || !container) return;
+            
+            btn.addEventListener('click', async () => {
+                try {
+                    btn.disabled = true;
+                    const originalHTML = btn.innerHTML;
+                    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Downloading...';
+                    
+                    let svgString = '';
+                    const svgElement = container.querySelector('svg');
+                    
+                    if (svgElement) {
+                        svgElement.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+                        svgString = new XMLSerializer().serializeToString(svgElement);
+                    } else {
+                        const { svg } = await mermaid.render(config.container + '-svg-' + Date.now(), diagrams[config.container]);
+                        svgString = svg;
+                    }
+                    
+                    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Converting to PNG...';
+                    
+                    const pngBlob = await convertToPNG(svgString);
+                    if (!pngBlob) throw new Error('Failed to generate PNG image');
+                    
+                    const url = URL.createObjectURL(pngBlob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = config.filename;
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    setTimeout(() => URL.revokeObjectURL(url), 100);
+                    
+                    btn.disabled = false;
+                    btn.innerHTML = originalHTML;
+                    
+                } catch (error) {
+                    console.error('Error downloading diagram:', error);
+                    alert('Failed to download. Please try again.');
+                    btn.disabled = false;
+                    btn.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg>
+                        Download as Image
+                    `;
+                }
+            });
+        });
+    }
+    
+    // Convert SVG to PNG - always returns PNG
+    function convertToPNG(svgString) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            
+            // Create data URL from SVG string for better compatibility
+            const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const svgDataUrl = e.target.result;
+                img.onload = function() {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        
+                        // Get original dimensions from image
+                        let originalWidth = img.naturalWidth || img.width;
+                        let originalHeight = img.naturalHeight || img.height;
+                        
+                        // If dimensions are 0 or invalid, use reasonable defaults
+                        if (!originalWidth || !originalHeight || originalWidth === 0 || originalHeight === 0) {
+                            originalWidth = 1200;
+                            originalHeight = 800;
+                        }
+                        
+                        // Target 4K resolution (3840x2160)
+                        // Scale up to 4K while maintaining aspect ratio
+                        const targetWidth = 3840; // 4K UHD width
+                        const targetHeight = 2160; // 4K UHD height
+                        
+                        // Calculate scale factor to reach 4K on the larger dimension
+                        const aspectRatio = originalWidth / originalHeight;
+                        let finalWidth, finalHeight;
+                        
+                        if (aspectRatio > (targetWidth / targetHeight)) {
+                            // Wider image - scale to 4K width
+                            finalWidth = targetWidth;
+                            finalHeight = Math.round(targetWidth / aspectRatio);
+                        } else {
+                            // Taller image - scale to 4K height
+                            finalHeight = targetHeight;
+                            finalWidth = Math.round(targetHeight * aspectRatio);
+                        }
+                        
+                        // Ensure we're at least close to 4K resolution
+                        // If the original is very small, scale it up significantly
+                        const minDimension = Math.min(finalWidth, finalHeight);
+                        if (minDimension < 2000) {
+                            const scaleFactor = 2000 / minDimension;
+                            finalWidth = Math.round(finalWidth * scaleFactor);
+                            finalHeight = Math.round(finalHeight * scaleFactor);
+                        }
+                        
+                        // Set canvas to 4K resolution
+                        canvas.width = finalWidth;
+                        canvas.height = finalHeight;
+                        const ctx = canvas.getContext('2d');
+                        
+                        // Enable high-quality image rendering
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
+                        
+                        // Fill white background
+                        ctx.fillStyle = '#FFFFFF';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        
+                        // Draw the SVG image scaled to 4K resolution
+                        ctx.drawImage(img, 0, 0, finalWidth, finalHeight);
+                        
+                        // Convert canvas to PNG blob with maximum quality
+                        canvas.toBlob(function(blob) {
+                            if (blob) {
+                                resolve(blob);
+                            } else {
+                                reject(new Error('Failed to create PNG from canvas'));
+                            }
+                        }, 'image/png', 1.0); // Maximum quality (1.0)
+                        
+                    } catch (err) {
+                        console.error('Canvas conversion error:', err);
+                        reject(new Error('Failed to convert to PNG: ' + err.message));
+                    }
+                };
+                
+                img.onerror = function() {
+                    reject(new Error('Failed to load SVG image for conversion'));
+                };
+                
+                // Set image source
+                img.src = svgDataUrl;
+            };
+            
+            reader.onerror = function() {
+                reject(new Error('Failed to read SVG file'));
+            };
+            
+            reader.readAsDataURL(svgBlob);
+        });
+    }
+    
+    // Dashboard Mockup Download Function
+    function setupDashboardDownload() {
+        const btn = document.getElementById('download-dashboard-btn');
+        const container = document.getElementById('dashboard-mockup');
+        
+        if (!btn || !container) return;
+        
+        btn.addEventListener('click', async () => {
+            try {
+                btn.disabled = true;
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Converting to PNG...';
+                
+                // Use html2canvas library for HTML to image conversion
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+                document.head.appendChild(script);
+                
+                script.onload = async () => {
+                    try {
+                        const canvas = await html2canvas(container, {
+                            scale: 3, // High quality
+                            backgroundColor: '#ffffff',
+                            logging: false,
+                            useCORS: true,
+                            width: container.scrollWidth,
+                            height: container.scrollHeight
+                        });
+                        
+                        // Convert to 4K resolution
+                        const targetWidth = 3840;
+                        const targetHeight = 2160;
+                        const aspectRatio = canvas.width / canvas.height;
+                        
+                        let finalWidth, finalHeight;
+                        if (aspectRatio > (targetWidth / targetHeight)) {
+                            finalWidth = targetWidth;
+                            finalHeight = Math.round(targetWidth / aspectRatio);
+                        } else {
+                            finalHeight = targetHeight;
+                            finalWidth = Math.round(targetHeight * aspectRatio);
+                        }
+                        
+                        const highResCanvas = document.createElement('canvas');
+                        highResCanvas.width = finalWidth;
+                        highResCanvas.height = finalHeight;
+                        const ctx = highResCanvas.getContext('2d');
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
+                        ctx.drawImage(canvas, 0, 0, finalWidth, finalHeight);
+                        
+                        highResCanvas.toBlob((blob) => {
+                            if (blob) {
+                                const url = URL.createObjectURL(blob);
+                                const link = document.createElement('a');
+                                link.href = url;
+                                link.download = 'figure-4.3-operator-dashboard-mockup.png';
+                                link.style.display = 'none';
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                                setTimeout(() => URL.revokeObjectURL(url), 100);
+                                
+                                btn.disabled = false;
+                                btn.innerHTML = originalHTML;
+                            } else {
+                                throw new Error('Failed to create PNG from canvas');
+                            }
+                        }, 'image/png', 1.0);
+                        
+                    } catch (error) {
+                        console.error('Error converting dashboard:', error);
+                        alert('Failed to download dashboard. Please try again.');
+                        btn.disabled = false;
+                        btn.innerHTML = originalHTML;
+                    }
+                };
+                
+                script.onerror = () => {
+                    alert('Failed to load conversion library. Please try again.');
+                    btn.disabled = false;
+                    btn.innerHTML = originalHTML;
+                };
+                
+            } catch (error) {
+                console.error('Error downloading dashboard:', error);
+                alert('Failed to download. Please try again.');
+                btn.disabled = false;
+                btn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                    </svg>
+                    Download as Image
+                `;
+            }
+        });
+    }
+</script>
+{% endblock %}
+

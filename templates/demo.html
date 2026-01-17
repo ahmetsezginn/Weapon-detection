@@ -1,0 +1,1904 @@
+{% extends "base.html" %}
+
+{% block title %}Demo - AI Threat Detection System{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="section-badge mb-3">Try It Now</div>
+                <h1 class="page-hero-title">Live Demo</h1>
+                <p class="page-hero-subtitle">Experience our AI-powered threat detection system in action</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <!-- Choice Section -->
+                <div id="choice-section" class="demo-choice-card mb-4">
+                    <div class="demo-card-header">
+                        <h3 class="demo-card-title">Select Detection Method</h3>
+                        <p class="demo-card-subtitle">Choose how you'd like to test our threat detection system</p>
+                    </div>
+                    <div class="demo-card-body">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="choice-card-modern" id="realtime-choice">
+                                    <div class="choice-icon-wrapper">
+                                        <div class="choice-icon realtime">
+                                            <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <h5 class="choice-title">Real-time Camera Detection</h5>
+                                    <p class="choice-description">Use your webcam for live threat detection</p>
+                                    <button id="choose-realtime" class="btn-demo-modern">Select</button>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="choice-card-modern" id="still-choice">
+                                    <div class="choice-icon-wrapper">
+                                        <div class="choice-icon image">
+                                            <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <h5 class="choice-title">Still Image Detection</h5>
+                                    <p class="choice-description">Upload an image for threat analysis</p>
+                                    <button id="choose-still" class="btn-demo-modern">Select</button>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="choice-card-modern" id="video-choice">
+                                    <div class="choice-icon-wrapper">
+                                        <div class="choice-icon video">
+                                            <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <h5 class="choice-title">Video Detection</h5>
+                                    <p class="choice-description">Upload a video for frame-by-frame threat analysis</p>
+                                    <button id="choose-video" class="btn-demo-modern">Select</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Real-time Camera Detection Section -->
+                <div id="realtime-section" class="demo-container-modern" style="display: none;">
+                    <h3 class="demo-section-title">Real-time Camera Detection</h3>
+                    
+                    <div class="demo-controls mb-4">
+                        <button id="start-camera" class="btn-demo-action btn-start">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>Start Camera</span>
+                        </button>
+                        <button id="stop-camera" class="btn-demo-action btn-stop" style="display: none;">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path>
+                            </svg>
+                            <span>Stop Camera</span>
+                        </button>
+                        <button id="back-to-choice-realtime" class="btn-demo-action btn-back">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            <span>Back</span>
+                        </button>
+                    </div>
+                    
+                    <div class="video-container-premium mb-4">
+                        <img id="video-stream" src="" alt="Video Stream" style="width: 100%; max-height: 500px; border-radius: 15px; display: none; object-fit: contain; background-color: #1a202c;">
+                        <div id="camera-placeholder" class="camera-placeholder-premium">
+                            <div class="placeholder-icon">
+                                <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <p class="placeholder-text">Click "Start Camera" to begin detection</p>
+                        </div>
+                    </div>
+                    
+                    <div id="detection-results" class="detection-results-premium"></div>
+                </div>
+                
+                <!-- Still Image Detection Section -->
+                <div id="still-section" class="demo-container-modern" style="display: none;">
+                    <h3 class="demo-section-title">Still Image Detection</h3>
+                    
+                    <div class="text-center mb-4">
+                        <button id="back-to-choice-still" class="btn-demo-action btn-back">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            <span>Back to Choice</span>
+                        </button>
+                    </div>
+                    
+                    <div class="upload-area-modern" id="upload-area">
+                        <div class="upload-icon-wrapper">
+                            <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                        </div>
+                        <h5 class="upload-title">Drag & Drop an image here or click to browse</h5>
+                        <p class="upload-subtitle">Supported formats: JPG, PNG, JPEG</p>
+                        <input type="file" id="image-upload" accept="image/*" class="d-none">
+                    </div>
+                    
+                    <div id="image-result-container" class="result-container-premium mt-4" style="display: none;">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="result-title-premium mb-0">Detection Results</h4>
+                            <button id="remove-image-btn" class="btn-remove-image" title="Remove image and upload another">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                                <span>Remove Image</span>
+                            </button>
+                        </div>
+                        <div class="image-preview-container">
+                            <img id="image-preview" src="" alt="Uploaded image" class="image-preview-premium">
+                        </div>
+                        <div id="image-detection-results" class="image-results-premium"></div>
+                    </div>
+                </div>
+                
+                <!-- Video Upload Detection Section -->
+                <div id="video-section" class="demo-container-modern" style="display: none;">
+                    <h3 class="demo-section-title">Video Detection</h3>
+                    
+                    <div class="text-center mb-4">
+                        <button id="back-to-choice-video" class="btn-demo-action btn-back">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            <span>Back to Choice</span>
+                        </button>
+                    </div>
+                    
+                    <div class="upload-area-modern" id="video-upload-area">
+                        <div class="upload-icon-wrapper">
+                            <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h5 class="upload-title">Drag & Drop a video or audio file here or click to browse</h5>
+                        <p class="upload-subtitle">Supported formats: MP4, AVI, MOV, WEBM, MP3 (Max 7.32 MB)</p>
+                        <input type="file" id="video-upload" accept="video/*,audio/*,.mp3" class="d-none">
+                    </div>
+                    
+                    <div id="video-result-container" class="result-container-premium mt-4" style="display: none;">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="result-title-premium mb-0">Video Analysis Results</h4>
+                            <button id="remove-video-btn" class="btn-remove-image" title="Remove video and upload another">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                                <span>Remove Video</span>
+                            </button>
+                        </div>
+                        <div class="video-preview-container mb-4">
+                            <video id="video-preview" controls class="video-preview-premium" style="display: none;"></video>
+                            <div id="video-processing-status" class="text-center py-4"></div>
+                        </div>
+                        <div id="video-detection-results" class="image-results-premium"></div>
+                        <div id="video-summary" class="mt-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Info Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="info-card-premium">
+                    <h3 class="info-title-premium">How Detection Works</h3>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="info-item-premium">
+                                <div class="info-icon-premium">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <h5>Real-time Camera Detection</h5>
+                                <ol>
+                                    <li><strong>Grant Camera Access:</strong> Click "Start Camera" and allow browser access</li>
+                                    <li><strong>Real-time Processing:</strong> YOLOv8 model analyzes each video frame</li>
+                                    <li><strong>Threat Detection:</strong> System identifies potential threats with confidence scores</li>
+                                    <li><strong>Visual Feedback:</strong> Results are displayed instantly</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info-item-premium">
+                                <div class="info-icon-premium">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <h5>Still Image Detection</h5>
+                                <ol>
+                                    <li><strong>Upload Image:</strong> Drag & drop or browse to select an image</li>
+                                    <li><strong>Image Processing:</strong> YOLOv8 model analyzes the entire image</li>
+                                    <li><strong>Threat Detection:</strong> System identifies potential threats with confidence scores</li>
+                                    <li><strong>Detailed Results:</strong> Complete analysis with bounding boxes</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info-item-premium">
+                                <div class="info-icon-premium">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <h5>Video Detection</h5>
+                                <ol>
+                                    <li><strong>Upload Video:</strong> Drag & drop or browse to select a video file</li>
+                                    <li><strong>Frame Processing:</strong> YOLOv8 model analyzes frames throughout the video</li>
+                                    <li><strong>Threat Analysis:</strong> System identifies threats with timestamps and confidence scores</li>
+                                    <li><strong>Comprehensive Report:</strong> Summary statistics and frame-by-frame analysis</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-premium alert-info-premium mt-4">
+                        <h5>Model Information</h5>
+                        <p>Our model detects two classes: <strong>threat</strong> and <strong>no-threat</strong>. When objects are detected with high confidence as "threat", an alert will be shown.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --text-dark: #1a202c;
+    --text-light: #718096;
+}
+
+.page-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 120px 0 80px;
+    color: white;
+    text-align: center;
+}
+
+.section-badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.page-hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.page-hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.content-section {
+    padding: 80px 0;
+}
+
+.demo-choice-card {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.demo-card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.demo-card-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.demo-card-subtitle {
+    color: var(--text-light);
+    font-size: 1.05rem;
+}
+
+.choice-card-modern {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid #f0f0f0;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.choice-card-modern:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border-color: #667eea;
+}
+
+.choice-icon-wrapper {
+    margin-bottom: 1.5rem;
+}
+
+.choice-icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.choice-icon.realtime {
+    background: var(--primary-gradient);
+}
+
+.choice-icon.image {
+    background: var(--secondary-gradient);
+}
+
+.choice-icon.video {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.choice-card-modern:hover .choice-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.choice-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+}
+
+.choice-description {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.btn-demo-modern {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    padding: 0.875rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    cursor: pointer;
+}
+
+.btn-demo-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+.demo-container-modern {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.demo-section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.demo-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-demo-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-start {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+.btn-stop {
+    background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+    color: white;
+    box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+}
+
+.btn-stop:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+    color: white;
+}
+
+.btn-back {
+    background: #f7fafc;
+    color: var(--text-dark);
+    border: 2px solid #e2e8f0;
+}
+
+.btn-back:hover {
+    background: #edf2f7;
+    transform: translateY(-2px);
+    color: var(--text-dark);
+}
+
+.video-container-premium {
+    position: relative;
+    background: #1a202c;
+    border-radius: 15px;
+    overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-container-premium video {
+    position: relative;
+    z-index: 1;
+}
+
+.video-container-premium img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+.video-container-premium canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    object-fit: contain;
+}
+
+.camera-placeholder-premium {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-light);
+}
+
+.placeholder-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    color: var(--text-light);
+    opacity: 0.5;
+}
+
+.placeholder-text {
+    font-size: 1.125rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.detection-results-premium {
+    margin-top: 2rem;
+}
+
+.upload-area-modern {
+    border: 3px dashed #667eea;
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+}
+
+.upload-area-modern:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-color: #764ba2;
+    transform: translateY(-2px);
+}
+
+.upload-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: var(--primary-gradient);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 0 auto 1.5rem;
+}
+
+.upload-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.upload-subtitle {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.result-container-premium {
+    background: #f7fafc;
+    border-radius: 15px;
+    padding: 2rem;
+}
+
+.result-title-premium {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.image-preview-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 2rem;
+    display: inline-block;
+    width: 100%;
+}
+
+.image-preview-premium {
+    max-width: 100%;
+    max-height: 500px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.video-preview-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.video-preview-premium {
+    max-width: 100%;
+    max-height: 500px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background: #000;
+}
+
+.image-results-premium {
+    margin-top: 1.5rem;
+}
+
+.btn-remove-image {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #fee;
+    border: 2px solid #f5576c;
+    border-radius: 10px;
+    color: #c53030;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-remove-image:hover {
+    background: #f5576c;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);
+}
+
+.btn-remove-image svg {
+    width: 18px;
+    height: 18px;
+}
+
+.info-card-premium {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.info-title-premium {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.info-item-premium {
+    padding: 1.5rem;
+    background: #f7fafc;
+    border-radius: 15px;
+    height: 100%;
+}
+
+.info-icon-premium {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-gradient);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.info-item-premium h5 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.info-item-premium ol {
+    padding-left: 1.5rem;
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+.alert-premium {
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid;
+}
+
+.alert-info-premium {
+    background: #e6f3ff;
+    border-color: #667eea;
+    color: var(--text-dark);
+}
+
+.alert-info-premium h5 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.alert-success-premium {
+    background: #f0fdf4;
+    border-color: #48bb78;
+    color: #22543d;
+}
+
+.alert-success-premium h5 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.alert-danger-premium {
+    background: #fee;
+    border-color: #f5576c;
+    color: #c53030;
+}
+
+.alert-danger-premium h5 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .page-hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .demo-choice-card, .demo-container-modern {
+        padding: 2rem;
+    }
+    
+    .demo-controls {
+        flex-direction: column;
+    }
+    
+    .btn-demo-action {
+        width: 100%;
+        justify-content: center;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Function to draw bounding boxes on an image element (defined globally)
+    function drawBoundingBoxes(imgElement, detections) {
+            if (!imgElement || !detections || detections.length === 0) {
+                return;
+            }
+            
+            // Remove any existing canvas overlay
+            const container = imgElement.parentElement;
+            if (!container) return;
+            
+            // Remove old overlay if exists
+            const oldOverlay = container.querySelector('.bbox-overlay');
+            if (oldOverlay) {
+                oldOverlay.remove();
+            }
+            
+            // Wait for image to load to get actual dimensions
+            const drawBoxes = () => {
+                const imgRect = imgElement.getBoundingClientRect();
+                const imgNaturalWidth = imgElement.naturalWidth;
+                const imgNaturalHeight = imgElement.naturalHeight;
+                const imgDisplayWidth = imgRect.width;
+                const imgDisplayHeight = imgRect.height;
+                
+                // Calculate scale factors
+                const scaleX = imgDisplayWidth / imgNaturalWidth;
+                const scaleY = imgDisplayHeight / imgNaturalHeight;
+                
+                // Make container relative if not already
+                if (getComputedStyle(container).position === 'static') {
+                    container.style.position = 'relative';
+                }
+                
+                // Create overlay container - position it directly over the image
+                const overlay = document.createElement('div');
+                overlay.className = 'bbox-overlay';
+                overlay.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: 10;
+                `;
+                
+                // Draw each bounding box
+                detections.forEach((detection, index) => {
+                    if (!detection.bbox || detection.bbox.length < 4) return;
+                    
+                    const [x1, y1, x2, y2] = detection.bbox;
+                    const isThreat = detection.class === 'threat';
+                    
+                    // Scale coordinates
+                    const scaledX1 = x1 * scaleX;
+                    const scaledY1 = y1 * scaleY;
+                    const scaledX2 = x2 * scaleX;
+                    const scaledY2 = y2 * scaleY;
+                    
+                    const width = scaledX2 - scaledX1;
+                    const height = scaledY2 - scaledY1;
+                    
+                    // Create box element
+                    const box = document.createElement('div');
+                    box.style.cssText = `
+                        position: absolute;
+                        left: ${scaledX1}px;
+                        top: ${scaledY1}px;
+                        width: ${width}px;
+                        height: ${height}px;
+                        border: 3px solid ${isThreat ? '#ff0000' : '#00ff00'};
+                        background: ${isThreat ? 'rgba(255, 0, 0, 0.1)' : 'rgba(0, 255, 0, 0.1)'};
+                        box-sizing: border-box;
+                    `;
+                    
+                    // Create label
+                    const label = document.createElement('div');
+                    label.style.cssText = `
+                        position: absolute;
+                        top: ${scaledY1 - 25}px;
+                        left: ${scaledX1}px;
+                        background: ${isThreat ? '#ff0000' : '#00ff00'};
+                        color: white;
+                        padding: 2px 8px;
+                        font-size: 12px;
+                        font-weight: bold;
+                        border-radius: 3px;
+                        white-space: nowrap;
+                    `;
+                    label.textContent = `${detection.class} ${(detection.confidence * 100).toFixed(1)}%`;
+                    
+                    overlay.appendChild(box);
+                    overlay.appendChild(label);
+                });
+                
+                container.appendChild(overlay);
+            };
+            
+            // Draw immediately if image is loaded, otherwise wait
+            if (imgElement.complete && imgElement.naturalHeight !== 0) {
+                drawBoxes();
+            } else {
+                imgElement.onload = drawBoxes;
+            }
+        }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all elements
+        const choiceSection = document.getElementById('choice-section');
+        const realtimeSection = document.getElementById('realtime-section');
+        const stillSection = document.getElementById('still-section');
+        const chooseRealtime = document.getElementById('choose-realtime');
+        const chooseStill = document.getElementById('choose-still');
+        const backToChoiceRealtime = document.getElementById('back-to-choice-realtime');
+        const backToChoiceStill = document.getElementById('back-to-choice-still');
+        const startButton = document.getElementById('start-camera');
+        const stopButton = document.getElementById('stop-camera');
+        const videoStream = document.getElementById('video-stream');
+        const cameraPlaceholder = document.getElementById('camera-placeholder');
+        const detectionResults = document.getElementById('detection-results');
+        const uploadArea = document.getElementById('upload-area');
+        const fileInput = document.getElementById('image-upload');
+        const imageResultContainer = document.getElementById('image-result-container');
+        const imagePreview = document.getElementById('image-preview');
+        const imageDetectionResults = document.getElementById('image-detection-results');
+        const removeImageBtn = document.getElementById('remove-image-btn');
+        const videoSection = document.getElementById('video-section');
+        const chooseVideo = document.getElementById('choose-video');
+        const backToChoiceVideo = document.getElementById('back-to-choice-video');
+        const videoUploadArea = document.getElementById('video-upload-area');
+        const videoUploadInput = document.getElementById('video-upload');
+        const videoResultContainer = document.getElementById('video-result-container');
+        const videoPreview = document.getElementById('video-preview');
+        const videoDetectionResults = document.getElementById('video-detection-results');
+        const videoProcessingStatus = document.getElementById('video-processing-status');
+        const videoSummary = document.getElementById('video-summary');
+        const removeVideoBtn = document.getElementById('remove-video-btn');
+        
+        // Removed client-side camera access - now using server-side streaming
+        
+        // Choice selection
+        if (chooseRealtime) {
+            chooseRealtime.addEventListener('click', () => {
+                if (choiceSection) choiceSection.style.display = 'none';
+                if (realtimeSection) realtimeSection.style.display = 'block';
+            });
+        }
+        
+        if (chooseStill) {
+            chooseStill.addEventListener('click', () => {
+                if (choiceSection) choiceSection.style.display = 'none';
+                if (stillSection) stillSection.style.display = 'block';
+            });
+        }
+        
+        if (chooseVideo) {
+            chooseVideo.addEventListener('click', () => {
+                if (choiceSection) choiceSection.style.display = 'none';
+                if (videoSection) videoSection.style.display = 'block';
+            });
+        }
+        
+        // Back to choice
+        if (backToChoiceRealtime) {
+            backToChoiceRealtime.addEventListener('click', async () => {
+                // Stop video stream
+                try {
+                    await fetch('/stop_video_stream', { method: 'POST' });
+                } catch (err) {
+                    console.error('Error stopping video stream:', err);
+                }
+                
+                if (videoStream) {
+                    videoStream.src = '';
+                    videoStream.style.display = 'none';
+                }
+                if (cameraPlaceholder) cameraPlaceholder.style.display = 'block';
+                if (startButton) startButton.style.display = 'inline-flex';
+                if (stopButton) stopButton.style.display = 'none';
+                
+                // Hide processing elements
+                if (detectionResults) detectionResults.innerHTML = '';
+                
+                if (realtimeSection) realtimeSection.style.display = 'none';
+                if (choiceSection) choiceSection.style.display = 'block';
+            });
+        }
+        
+        if (backToChoiceStill) {
+            backToChoiceStill.addEventListener('click', () => {
+                // Reset image upload
+                if (fileInput) fileInput.value = '';
+                if (imagePreview) {
+                    imagePreview.src = '';
+                    imagePreview.style.display = 'none';
+                }
+                if (imageResultContainer) imageResultContainer.style.display = 'none';
+                if (imageDetectionResults) imageDetectionResults.innerHTML = '';
+                
+                if (stillSection) stillSection.style.display = 'none';
+                if (choiceSection) choiceSection.style.display = 'block';
+            });
+        }
+        
+        if (backToChoiceVideo) {
+            backToChoiceVideo.addEventListener('click', () => {
+                // Reset video upload
+                if (videoUploadInput) videoUploadInput.value = '';
+                if (videoPreview) {
+                    videoPreview.src = '';
+                    videoPreview.style.display = 'none';
+                }
+                if (videoResultContainer) videoResultContainer.style.display = 'none';
+                if (videoDetectionResults) videoDetectionResults.innerHTML = '';
+                if (videoSummary) videoSummary.innerHTML = '';
+                if (videoProcessingStatus) videoProcessingStatus.innerHTML = '';
+                
+                if (videoSection) videoSection.style.display = 'none';
+                if (choiceSection) choiceSection.style.display = 'block';
+            });
+        }
+        
+        // Start camera
+        if (startButton) {
+            startButton.addEventListener('click', async () => {
+                try {
+                    // Start video stream on server
+                    const response = await fetch('/start_video_stream', { method: 'POST' });
+                    const data = await response.json();
+                    
+                    if (data.error) {
+                        alert('Error: ' + data.error);
+                        return;
+                    }
+                    
+                    // Set video stream source
+                    if (videoStream) {
+                        videoStream.src = '/video_feed?' + new Date().getTime(); // Cache busting
+                        videoStream.style.display = 'block';
+                        videoStream.onload = () => {
+                            if (detectionResults) {
+                                detectionResults.innerHTML = `
+                                    <div class="alert-premium alert-success-premium">
+                                        <h5>✅ Camera Started</h5>
+                                        <p class="mb-0">Detection is running. Threats will be highlighted in red.</p>
+                                    </div>
+                                `;
+                            }
+                        };
+                        videoStream.onerror = () => {
+                            alert('Error loading video stream. Please make sure the server has access to your webcam.');
+                        };
+                    }
+                    
+                    if (cameraPlaceholder) cameraPlaceholder.style.display = 'none';
+                    if (startButton) startButton.style.display = 'none';
+                    if (stopButton) stopButton.style.display = 'inline-flex';
+                    
+                } catch (err) {
+                    console.error('Error starting camera:', err);
+                    alert('Could not start camera. Please make sure you have a camera connected and the server has permission to access it.');
+                }
+            });
+        }
+        
+        // Stop camera
+        if (stopButton) {
+            stopButton.addEventListener('click', async () => {
+                try {
+                    // Stop video stream on server
+                    await fetch('/stop_video_stream', { method: 'POST' });
+                } catch (err) {
+                    console.error('Error stopping video stream:', err);
+                }
+                
+                if (videoStream) {
+                    videoStream.src = '';
+                    videoStream.style.display = 'none';
+                }
+                if (cameraPlaceholder) cameraPlaceholder.style.display = 'block';
+                if (startButton) startButton.style.display = 'inline-flex';
+                if (stopButton) stopButton.style.display = 'none';
+                
+                if (detectionResults) detectionResults.innerHTML = '';
+            });
+        }
+        
+        // Detection results are now displayed directly in the video stream
+        // The server processes frames and draws bounding boxes before streaming
+
+        // Handle file upload
+        if (uploadArea && fileInput) {
+            uploadArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '#764ba2';
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.borderColor = '#667eea';
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '#667eea';
+                
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileUpload(e.dataTransfer.files[0]);
+                }
+            });
+            
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files.length) {
+                    handleFileUpload(fileInput.files[0]);
+                }
+            });
+        }
+        
+        // Handle remove image button
+        if (removeImageBtn) {
+            removeImageBtn.addEventListener('click', () => {
+                // Clear file input
+                if (fileInput) {
+                    fileInput.value = '';
+                }
+                
+                // Remove any canvas that replaced the image
+                const imagePreviewContainer = document.querySelector('.image-preview-container');
+                if (imagePreviewContainer) {
+                    const existingCanvas = imagePreviewContainer.querySelector('canvas');
+                    if (existingCanvas) {
+                        existingCanvas.remove();
+                    }
+                    // Restore image element if it was replaced
+                    let imgElement = imagePreviewContainer.querySelector('img#image-preview');
+                    if (!imgElement) {
+                        imgElement = document.createElement('img');
+                        imgElement.id = 'image-preview';
+                        imgElement.alt = 'Uploaded image';
+                        imgElement.className = 'image-preview-premium';
+                        imagePreviewContainer.appendChild(imgElement);
+                    }
+                    imgElement.src = '';
+                    imgElement.style.display = 'none';
+                }
+                
+                // Clear image preview
+                if (imagePreview) {
+                    imagePreview.src = '';
+                    imagePreview.style.display = 'none';
+                }
+                
+                // Hide result container
+                if (imageResultContainer) {
+                    imageResultContainer.style.display = 'none';
+                }
+                
+                // Clear detection results
+                if (imageDetectionResults) {
+                    imageDetectionResults.innerHTML = '';
+                }
+                
+                // Reset upload area border color
+                if (uploadArea) {
+                    uploadArea.style.borderColor = '#667eea';
+                }
+            });
+        }
+        
+        function handleFileUpload(file) {
+            if (!file.type.match('image.*')) {
+                alert('Please select an image file (JPEG, PNG, etc.)');
+                return;
+            }
+            
+            // Clear previous canvas if it exists (from previous detection)
+            const imagePreviewContainer = document.querySelector('.image-preview-container');
+            if (imagePreviewContainer) {
+                const existingCanvas = imagePreviewContainer.querySelector('canvas');
+                if (existingCanvas) {
+                    // Remove the canvas
+                    existingCanvas.remove();
+                }
+                // Make sure we have an image element
+                if (!imagePreview || imagePreview.tagName !== 'IMG') {
+                    // Create a new image element if it was replaced by canvas
+                    const newImg = document.createElement('img');
+                    newImg.id = 'image-preview';
+                    newImg.alt = 'Uploaded image';
+                    newImg.className = 'image-preview-premium';
+                    newImg.style.display = 'none';
+                    imagePreviewContainer.appendChild(newImg);
+                    // Update the reference
+                    const updatedImagePreview = document.getElementById('image-preview');
+                    if (updatedImagePreview) {
+                        imagePreview = updatedImagePreview;
+                    }
+                }
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Get fresh reference to container and ensure we have an image element
+                const imagePreviewContainer = document.querySelector('.image-preview-container');
+                if (imagePreviewContainer) {
+                    // Remove any existing canvas from previous detection
+                    const existingCanvas = imagePreviewContainer.querySelector('canvas');
+                    if (existingCanvas) {
+                        existingCanvas.remove();
+                    }
+                    
+                    // Get or create image element
+                    let imgElement = imagePreviewContainer.querySelector('img#image-preview');
+                    if (!imgElement) {
+                        imgElement = document.createElement('img');
+                        imgElement.id = 'image-preview';
+                        imgElement.alt = 'Uploaded image';
+                        imgElement.className = 'image-preview-premium';
+                        imagePreviewContainer.appendChild(imgElement);
+                    }
+                    
+                    // Clear and set new image with cache busting
+                    imgElement.src = '';
+                    // Use a small delay to ensure browser clears the old image
+                    setTimeout(() => {
+                        imgElement.src = e.target.result;
+                        imgElement.style.display = 'block';
+                    }, 50);
+                } else if (imagePreview) {
+                    // Fallback to original method
+                    imagePreview.src = '';
+                    setTimeout(() => {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    }, 50);
+                }
+                
+                if (imageResultContainer) {
+                    imageResultContainer.style.display = 'block';
+                    
+                    const processingText = document.createElement('div');
+                    processingText.className = 'text-center';
+                    processingText.innerHTML = `
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Processing...</span>
+                        </div>
+                        <p class="mt-2">Analyzing image for threats...</p>
+                    `;
+                    if (imageDetectionResults) {
+                        imageDetectionResults.innerHTML = '';
+                        imageDetectionResults.appendChild(processingText);
+                    }
+                }
+                
+                const formData = new FormData();
+                formData.append('image', file);
+                
+                fetch('/detect', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    if (!response.ok) {
+                        return response.json().then(err => {
+                            throw new Error(err.error || `Server error: ${response.status}`);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Detection response:', data);
+                    if (imageDetectionResults) {
+                        imageDetectionResults.innerHTML = '';
+                        
+                        if (data.error) {
+                            console.error('Server error:', data.error);
+                            imageDetectionResults.innerHTML = `
+                                <div class="alert-premium" style="background: #fee; border-color: #f5576c; color: #c53030;">
+                                    <h5>Error:</h5>
+                                    <p>${data.error}</p>
+                                    ${data.details ? `<p class="mb-0" style="font-size: 0.875rem; margin-top: 0.5rem;">Details: ${data.details}</p>` : ''}
+                                </div>
+                            `;
+                        } else {
+                            // Draw bounding boxes on image after it loads
+                            // Get fresh reference to image element
+                            const imagePreviewContainer = document.querySelector('.image-preview-container');
+                            const currentImageElement = imagePreviewContainer ? imagePreviewContainer.querySelector('img#image-preview') : imagePreview;
+                            
+                            if (currentImageElement) {
+                                const drawBoxes = () => {
+                                    drawBoundingBoxes(currentImageElement, data.detections || []);
+                                };
+                                
+                                // Wait for image to load if not already loaded
+                                if (currentImageElement.complete && currentImageElement.naturalHeight !== 0) {
+                                    // Image already loaded, draw immediately
+                                    drawBoxes();
+                                } else {
+                                    // Wait for image to load
+                                    currentImageElement.onload = drawBoxes;
+                                }
+                            }
+                            displayImageDetectionResults(data);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Image detection error:', error);
+                    if (imageDetectionResults) {
+                        const errorMsg = error.message || 'Unknown error occurred';
+                        imageDetectionResults.innerHTML = `
+                            <div class="alert-premium" style="background: #fee; border-color: #f5576c; color: #c53030;">
+                                <h5>Error:</h5>
+                                <p>Failed to process the image: ${errorMsg}</p>
+                                <p class="mb-0" style="font-size: 0.875rem; margin-top: 0.5rem;">Please check the console for more details or try again.</p>
+                            </div>
+                        `;
+                    }
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function displayImageDetectionResults(data) {
+            if (!imageDetectionResults) return;
+            
+            // If no detections at all, treat as non-threat (safe)
+            if (!data.detections || data.detections.length === 0) {
+                imageDetectionResults.innerHTML = `
+                    <div class="alert-premium alert-success-premium">
+                        <h5>✅ No Threats Detected</h5>
+                        <p class="mb-0">No objects were detected. The scene appears safe.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Filter threats: only objects classified as 'threat' with confidence > 0.5
+            const threats = data.detections.filter(d => d.class === 'threat' && d.confidence > 0.5);
+            
+            let resultHTML = '';
+            
+            // Show threat warning ONLY if there are actual threats
+            if (threats.length > 0) {
+                resultHTML += `
+                    <div class="alert-premium" style="background: #fee; border-color: #f5576c; color: #c53030;">
+                        <h5>⚠️ THREATS DETECTED!</h5>
+                        <ul>
+                `;
+                
+                threats.forEach(detection => {
+                    resultHTML += `<li><strong>${detection.class}</strong> (Confidence: ${(detection.confidence * 100).toFixed(1)}%)</li>`;
+                });
+                
+                resultHTML += `
+                        </ul>
+                        <p class="mb-0"><strong>Total threats:</strong> ${threats.length}</p>
+                    </div>
+                `;
+            } else {
+                // Only show no-threat message if there are NO threats
+                resultHTML += `
+                    <div class="alert-premium alert-success-premium">
+                        <h5>✅ No Threats Detected</h5>
+                        <p class="mb-0">No threats were detected in the image. The scene appears safe.</p>
+                    </div>
+                `;
+            }
+            
+            imageDetectionResults.innerHTML = resultHTML;
+        }
+        
+        // Handle video upload
+        if (videoUploadArea && videoUploadInput) {
+            videoUploadArea.addEventListener('click', () => {
+                videoUploadInput.click();
+            });
+            
+            videoUploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                videoUploadArea.style.borderColor = '#764ba2';
+            });
+            
+            videoUploadArea.addEventListener('dragleave', () => {
+                videoUploadArea.style.borderColor = '#667eea';
+            });
+            
+            videoUploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                videoUploadArea.style.borderColor = '#667eea';
+                
+                if (e.dataTransfer.files.length) {
+                    videoUploadInput.files = e.dataTransfer.files;
+                    handleVideoUpload(e.dataTransfer.files[0]);
+                }
+            });
+            
+            videoUploadInput.addEventListener('change', () => {
+                if (videoUploadInput.files.length) {
+                    handleVideoUpload(videoUploadInput.files[0]);
+                }
+            });
+        }
+        
+        function handleVideoUpload(file) {
+            // Check file size (max 7.32 MB = 7,675,904 bytes)
+            const maxSize = 7675904; // 7.32 MB in bytes
+            if (file.size > maxSize) {
+                const fileSizeMB = (file.size / 1024 / 1024).toFixed(2);
+                alert(`File is too large. Maximum size is 7.32 MB. Your file is ${fileSizeMB} MB.`);
+                return;
+            }
+            
+            // Check if file is video or audio (including MP3)
+            const isVideo = file.type.match('video.*');
+            const isAudio = file.type.match('audio.*') || file.name.toLowerCase().endsWith('.mp3');
+            
+            if (!isVideo && !isAudio) {
+                alert('Please select a video or audio file (MP4, AVI, MOV, WEBM, MP3, etc.)');
+                return;
+            }
+            
+            console.log('File selected:', file.name, file.type, file.size, isAudio ? '(Audio)' : '(Video)');
+            
+            // Show video/audio preview immediately
+            if (videoPreview) {
+                // Revoke previous object URL if exists
+                if (videoPreview.src && videoPreview.src.startsWith('blob:')) {
+                    URL.revokeObjectURL(videoPreview.src);
+                }
+                const mediaURL = URL.createObjectURL(file);
+                videoPreview.src = mediaURL;
+                videoPreview.style.display = 'block';
+                
+                // Add event listeners for video/audio loading
+                videoPreview.onloadedmetadata = function() {
+                    if (isAudio) {
+                        console.log('Audio file loaded:', file.name);
+                    } else {
+                        console.log('Video metadata loaded:', videoPreview.videoWidth, 'x', videoPreview.videoHeight);
+                    }
+                };
+                
+                videoPreview.onerror = function(e) {
+                    console.error('Error loading media:', e);
+                    if (isAudio) {
+                        // For audio files, still try to process but show a note
+                        console.log('Note: Audio-only files (MP3) cannot be analyzed for video threats.');
+                    } else {
+                        alert('Error loading video preview. The file may be corrupted or in an unsupported format.');
+                    }
+                };
+                
+                videoPreview.load(); // Force media to load
+            }
+            
+            // Show result container
+            if (videoResultContainer) {
+                videoResultContainer.style.display = 'block';
+            }
+            
+            // Show processing status while video is being processed
+            if (videoProcessingStatus) {
+                const fileType = isAudio ? 'audio' : 'video';
+                videoProcessingStatus.innerHTML = `
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                            <span class="visually-hidden">Processing...</span>
+                        </div>
+                        <p class="mt-3"><strong>Processing ${fileType} with model...</strong></p>
+                        <p class="text-muted">Analyzing frames and detecting objects</p>
+                        <p class="text-muted small">File: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</p>
+                        <div class="progress mt-3" style="height: 6px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                `;
+                videoProcessingStatus.style.display = 'block';
+                console.log('Processing status displayed');
+            }
+            
+            // Clear previous results
+            if (videoDetectionResults) {
+                videoDetectionResults.innerHTML = '';
+            }
+            if (videoSummary) {
+                videoSummary.innerHTML = '';
+            }
+            
+            // Upload and process video
+            const formData = new FormData();
+            formData.append('video', file);
+            
+            console.log('Uploading video to server...');
+            
+            fetch('/detect_video', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                console.log('Response status:', response.status);
+                if (!response.ok) {
+                    return response.json().then(err => {
+                        throw new Error(err.error || `Server error: ${response.status}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('=== VIDEO PROCESSING RESPONSE ===');
+                console.log('File processing complete:', data);
+                console.log('Response data keys:', Object.keys(data));
+                console.log('Status:', data.status);
+                console.log('Processed video URL:', data.processed_video_url);
+                console.log('Total frames:', data.total_frames);
+                console.log('Detections count:', data.detections ? data.detections.length : 0);
+                console.log('Message:', data.message);
+                console.log('================================');
+                
+                // Hide processing status and show completion message
+                if (videoProcessingStatus) {
+                    videoProcessingStatus.innerHTML = `
+                        <div class="text-center py-2">
+                            <div class="alert alert-success" role="alert">
+                                <strong>✓ Processing Complete!</strong> Video analyzed successfully.
+                            </div>
+                        </div>
+                    `;
+                    // Hide after 3 seconds
+                    setTimeout(() => {
+                        if (videoProcessingStatus) {
+                            videoProcessingStatus.innerHTML = '';
+                            videoProcessingStatus.style.display = 'none';
+                        }
+                    }, 3000);
+                }
+                
+            if (data.error || data.status === 'error') {
+                console.error('Error in response:', data.error);
+                // Show error in processing status
+                if (videoProcessingStatus) {
+                    videoProcessingStatus.innerHTML = `
+                        <div class="text-center py-2">
+                            <div class="alert alert-danger" role="alert">
+                                <strong>✗ Processing Failed</strong><br>
+                                ${data.error}
+                            </div>
+                        </div>
+                    `;
+                }
+                if (videoDetectionResults) {
+                    videoDetectionResults.innerHTML = `
+                        <div class="alert-premium" style="background: #fee; border-color: #f5576c; color: #c53030;">
+                            <h5>Error:</h5>
+                            <p>${data.error}</p>
+                            ${data.details ? `<p class="mb-0 text-muted">${data.details}</p>` : ''}
+                        </div>
+                    `;
+                }
+                return;
+            }
+
+            // Show processed video with bounding boxes
+            if (videoResultContainer) {
+                videoResultContainer.style.display = 'block';
+                console.log('Video result container displayed');
+            } else {
+                console.error('Video result container element not found!');
+            }
+            
+            // Ensure summary and results sections are visible (FORCE VISIBILITY)
+            if (videoSummary) {
+                videoSummary.style.display = 'block';
+                videoSummary.style.visibility = 'visible';
+                console.log('✓ Video summary made visible');
+            }
+            if (videoDetectionResults) {
+                videoDetectionResults.style.display = 'block';
+                videoDetectionResults.style.visibility = 'visible';
+                console.log('✓ Video detection results made visible');
+            }
+            
+            // Force result container to be visible
+            if (videoResultContainer) {
+                videoResultContainer.style.display = 'block';
+                videoResultContainer.style.visibility = 'visible';
+                videoResultContainer.style.opacity = '1';
+            }
+            
+            if (videoPreview && data.processed_video_url) {
+                console.log('Setting video preview source:', data.processed_video_url);
+                // Clear previous source
+                videoPreview.src = '';
+                
+                // cache-bust the URL to ensure fresh load
+                const cacheBust = `${data.processed_video_url}${data.processed_video_url.includes('?') ? '&' : '?'}t=${Date.now()}`;
+                console.log('Cache-busted URL:', cacheBust);
+                
+                // Make video element highly visible (like the test window)
+                videoPreview.src = cacheBust;
+                videoPreview.style.display = 'block';
+                videoPreview.style.visibility = 'visible';
+                videoPreview.style.width = '100%';
+                videoPreview.style.maxWidth = '100%';
+                videoPreview.style.height = 'auto';
+                videoPreview.style.border = '2px solid #667eea';
+                videoPreview.style.borderRadius = '15px';
+                videoPreview.style.backgroundColor = '#1a202c';
+                videoPreview.controls = true;
+                videoPreview.controlsList = 'nodownload';
+                console.log('✓ Video element styled and made visible');
+                
+                // Add error handling
+                videoPreview.onerror = function(e) {
+                    console.error('Error loading processed video:', e);
+                    console.error('Video URL:', cacheBust);
+                    if (videoDetectionResults) {
+                        videoDetectionResults.innerHTML = `
+                            <div class="alert-premium" style="background: #fee; border-color: #f5576c; color: #c53030;">
+                                <h5>Video Playback Error</h5>
+                                <p>The processed video was created but cannot be played in your browser.</p>
+                                <p class="mb-0"><strong>Video URL:</strong> <a href="${cacheBust}" target="_blank" download>Click here to download</a></p>
+                            </div>
+                        `;
+                    }
+                };
+                
+                // Add success handler
+                videoPreview.onloadeddata = function() {
+                    console.log('Processed video loaded successfully');
+                    videoPreview.play().catch(e => {
+                        console.log('Autoplay prevented, user can click play');
+                    });
+                };
+                
+                videoPreview.load();
+            } else {
+                console.error('✗ Video preview element or URL missing:', {
+                    videoPreview: !!videoPreview,
+                    processed_video_url: data.processed_video_url
+                });
+                // Show error message if video URL is missing
+                if (videoDetectionResults) {
+                    videoDetectionResults.innerHTML = `
+                        <div class="alert-premium" style="background: #fee; border-color: #f5576c; color: #c53030;">
+                            <h5>Video Processing Error</h5>
+                            <p>Video was processed but the result URL is missing.</p>
+                            <p class="mb-0">Please check the console for details.</p>
+                        </div>
+                    `;
+                }
+            }
+
+            // Show a quick summary (ALWAYS show, even if empty) - CRITICAL SECTION
+            console.log('=== DISPLAYING VIDEO SUMMARY ===');
+            if (videoSummary) {
+                const detections = data.detections || [];
+                const threats = detections.filter(d => d.class === 'threat' && d.confidence > 0.5);
+                const summaryHTML = `
+                    <div class="alert-premium ${threats.length > 0 ? 'alert-danger-premium' : 'alert-success-premium'}" style="${threats.length > 0 ? 'background: #fee; border-color: #f5576c; color: #c53030;' : ''}">
+                        <h5>${threats.length > 0 ? '⚠️ Threats Detected' : '✅ No Threats Detected'}</h5>
+                        <p class="mb-1"><strong>Total Frames Processed:</strong> ${data.total_frames || 0}</p>
+                        <p class="mb-1"><strong>Total Detections:</strong> ${detections.length}</p>
+                        <p class="mb-0"><strong>Threats (confidence > 0.5):</strong> ${threats.length}</p>
+                        ${data.message ? `<p class="mb-0 mt-2 text-muted small">${data.message}</p>` : ''}
+                    </div>
+                `;
+                videoSummary.innerHTML = summaryHTML;
+                videoSummary.style.display = 'block';
+                videoSummary.style.visibility = 'visible';
+                videoSummary.style.opacity = '1';
+                console.log('✓ Video summary HTML set and made visible');
+                console.log('  - Detections:', detections.length);
+                console.log('  - Threats:', threats.length);
+                console.log('  - Total frames:', data.total_frames);
+            } else {
+                console.error('✗✗✗ VIDEO SUMMARY ELEMENT NOT FOUND! ✗✗✗');
+            }
+
+            // List detections (ALWAYS show results section)
+            console.log('Attempting to display detection results...');
+            if (videoDetectionResults) {
+                if (!data.detections || data.detections.length === 0) {
+                    const noDetectionsHTML = `
+                        <div class="alert-premium alert-success-premium">
+                            <h5>✅ Video Analysis Complete</h5>
+                            <p class="mb-1">No objects were detected in the processed frames.</p>
+                            <p class="mb-0"><strong>Total Frames Analyzed:</strong> ${data.total_frames || 0}</p>
+                            ${data.message ? `<p class="mb-0 mt-2"><em>${data.message}</em></p>` : ''}
+                        </div>
+                    `;
+                    videoDetectionResults.innerHTML = noDetectionsHTML;
+                    videoDetectionResults.style.display = 'block';
+                    videoDetectionResults.style.visibility = 'visible';
+                    console.log('✓ No detections - showing success message');
+                } else {
+                    console.log(`✓ Displaying ${data.detections.length} detections`);
+                    let resultsHTML = `
+                        <div class="alert-premium alert-info-premium">
+                            <h5>Detections</h5>
+                            <p class="mb-3">Found ${data.detections.length} detections.</p>
+                            <div style="max-height: 400px; overflow-y: auto;">
+                    `;
+                    data.detections.slice(0, 50).forEach((det, idx) => {
+                        resultsHTML += `
+                            <div class="mb-2 p-2" style="background: ${det.class === 'threat' ? '#fee' : '#f0f9ff'}; border-radius: 8px; border-left: 4px solid ${det.class === 'threat' ? '#f5576c' : '#667eea'};">
+                                <strong>${det.class}</strong> (${(det.confidence * 100).toFixed(1)}%)${det.frame !== undefined ? ` — Frame ${det.frame}` : ''}${det.timestamp !== undefined ? ` — ${det.timestamp.toFixed(2)}s` : ''}
+                            </div>
+                        `;
+                    });
+                    if (data.detections.length > 50) {
+                        resultsHTML += `<p class="text-muted mt-2"><em>... and ${data.detections.length - 50} more</em></p>`;
+                    }
+                    resultsHTML += `
+                            </div>
+                        </div>
+                    `;
+                    videoDetectionResults.innerHTML = resultsHTML;
+                }
+                console.log('Video detection results displayed');
+            } else {
+                console.error('Video detection results element not found!');
+                // Fallback: show results in alert if element not found
+                alert(`Video Analysis Complete!\nTotal Frames: ${data.total_frames || 0}\nDetections: ${(data.detections || []).length}`);
+            }
+            
+            // Force display of all result sections
+            console.log('Final check - ensuring all sections are visible:');
+            console.log('  - videoResultContainer:', videoResultContainer ? 'found' : 'NOT FOUND');
+            console.log('  - videoPreview:', videoPreview ? 'found' : 'NOT FOUND');
+            console.log('  - videoSummary:', videoSummary ? 'found' : 'NOT FOUND');
+            console.log('  - videoDetectionResults:', videoDetectionResults ? 'found' : 'NOT FOUND');
+            
+            // CRITICAL: Force show result container if it exists
+            if (videoResultContainer) {
+                videoResultContainer.style.display = 'block';
+                videoResultContainer.style.visibility = 'visible';
+                console.log('✓ Forced videoResultContainer to be visible');
+            }
+            
+            // Scroll to results if they exist
+            if (videoResultContainer) {
+                setTimeout(() => {
+                    videoResultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 500);
+            }
+            })
+                .catch(error => {
+                console.error('File processing error:', error);
+                if (videoProcessingStatus) {
+                    videoProcessingStatus.innerHTML = '';
+                }
+                if (videoDetectionResults) {
+                    const errorMsg = error.message || error;
+                    videoDetectionResults.innerHTML = `
+                        <div class="alert-premium" style="background: #fee; border-color: #f5576c; color: #c53030;">
+                            <h5>Error:</h5>
+                            <p>Failed to process the file. Please try again.</p>
+                            <p class="mb-0 text-muted">${errorMsg}</p>
+                        </div>
+                    `;
+                }
+            });
+        }
+        
+        function displayVideoResults(data) {
+            if (!data.summary) return;
+            
+            const summary = data.summary;
+            const hasThreats = summary.has_threats;
+            const isAudioOnly = summary.is_audio_only || false;
+            
+            // Handle audio-only files (MP3)
+            if (isAudioOnly) {
+                if (videoSummary) {
+                    videoSummary.innerHTML = `
+                        <div class="alert-premium alert-info-premium">
+                            <h5>📻 Audio File Detected</h5>
+                            <p class="mb-2">${summary.message || 'Audio-only files (MP3, WAV) cannot be analyzed for visual threats.'}</p>
+                            <p class="mb-0"><strong>Note:</strong> This system requires video files with visual frames for threat detection. Please upload a video file (MP4, AVI, MOV, WEBM) for analysis.</p>
+                        </div>
+                    `;
+                }
+                if (videoDetectionResults) {
+                    videoDetectionResults.innerHTML = `
+                        <div class="alert-premium alert-info-premium">
+                            <h5>ℹ️ Audio File Information</h5>
+                            <p class="mb-0">Audio files do not contain visual frames that can be analyzed for threats. The system successfully received your file, but visual threat detection requires video content.</p>
+                        </div>
+                    `;
+                }
+                return;
+            }
+            
+            // Display summary for video files
+            if (videoSummary) {
+                let summaryHTML = `
+                    <div class="alert-premium ${hasThreats ? 'alert-danger-premium' : 'alert-success-premium'}" style="${hasThreats ? 'background: #fee; border-color: #f5576c; color: #c53030;' : ''}">
+                        <h5>${hasThreats ? '⚠️ THREATS DETECTED IN VIDEO' : '✅ NO THREATS DETECTED'}</h5>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <p><strong>Video Duration:</strong> ${summary.duration.toFixed(2)} seconds</p>
+                                <p><strong>Total Frames:</strong> ${summary.total_frames}</p>
+                                <p><strong>Processed Frames:</strong> ${summary.processed_frames}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Frames with Threats:</strong> ${summary.threat_frames}</p>
+                                <p><strong>Threat Percentage:</strong> ${summary.threat_percentage}%</p>
+                                <p><strong>FPS:</strong> ${summary.fps}</p>
+                            </div>
+                        </div>
+                `;
+                
+                if (hasThreats && summary.threat_timestamps && summary.threat_timestamps.length > 0) {
+                    summaryHTML += `
+                        <div class="mt-3">
+                            <strong>Threat detected at timestamps:</strong>
+                            <ul class="mt-2">
+                    `;
+                    summary.threat_timestamps.slice(0, 10).forEach(timestamp => {
+                        summaryHTML += `<li>${timestamp.toFixed(2)}s</li>`;
+                    });
+                    if (summary.threat_timestamps.length > 10) {
+                        summaryHTML += `<li><em>... and ${summary.threat_timestamps.length - 10} more</em></li>`;
+                    }
+                    summaryHTML += `
+                            </ul>
+                        </div>
+                    `;
+                }
+                
+                summaryHTML += `</div>`;
+                videoSummary.innerHTML = summaryHTML;
+            }
+            
+            // Display detection results
+            if (videoDetectionResults && data.detections && data.detections.length > 0) {
+                let resultsHTML = `
+                    <div class="alert-premium alert-info-premium">
+                        <h5>Frame-by-Frame Analysis</h5>
+                        <p class="mb-3">Detections found in ${data.detections.length} frames:</p>
+                        <div style="max-height: 400px; overflow-y: auto;">
+                `;
+                
+                data.detections.slice(0, 20).forEach(frameData => {
+                    const threats = frameData.detections.filter(d => d.class === 'threat' && d.confidence > 0.5);
+                    if (threats.length > 0 || frameData.detections.length > 0) {
+                        resultsHTML += `
+                            <div class="mb-2 p-2" style="background: ${threats.length > 0 ? '#fee' : '#f0f9ff'}; border-radius: 8px; border-left: 4px solid ${threats.length > 0 ? '#f5576c' : '#667eea'};">
+                                <strong>Frame ${frameData.frame}</strong> (${frameData.timestamp.toFixed(2)}s):
+                                <ul class="mb-0 mt-1">
+                        `;
+                        frameData.detections.forEach(det => {
+                            resultsHTML += `<li>${det.class} (${(det.confidence * 100).toFixed(1)}%)</li>`;
+                        });
+                        resultsHTML += `
+                                </ul>
+                            </div>
+                        `;
+                    }
+                });
+                
+                if (data.detections.length > 20) {
+                    resultsHTML += `<p class="text-muted mt-2"><em>... and ${data.detections.length - 20} more frames with detections</em></p>`;
+                }
+                
+                resultsHTML += `
+                        </div>
+                    </div>
+                `;
+                videoDetectionResults.innerHTML = resultsHTML;
+            } else if (videoDetectionResults) {
+                videoDetectionResults.innerHTML = `
+                    <div class="alert-premium alert-success-premium">
+                        <h5>✅ No Detections</h5>
+                        <p class="mb-0">No objects were detected in the processed frames.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Handle remove video button
+        if (removeVideoBtn) {
+            removeVideoBtn.addEventListener('click', () => {
+                // Clear file input
+                if (videoUploadInput) {
+                    videoUploadInput.value = '';
+                }
+                
+                // Clear video preview
+                if (videoPreview) {
+                    videoPreview.src = '';
+                    videoPreview.style.display = 'none';
+                }
+                
+                // Hide result container
+                if (videoResultContainer) {
+                    videoResultContainer.style.display = 'none';
+                }
+                
+                // Clear detection results
+                if (videoDetectionResults) {
+                    videoDetectionResults.innerHTML = '';
+                }
+                if (videoSummary) {
+                    videoSummary.innerHTML = '';
+                }
+                if (videoProcessingStatus) {
+                    videoProcessingStatus.innerHTML = '';
+                }
+                
+                // Reset upload area border color
+                if (videoUploadArea) {
+                    videoUploadArea.style.borderColor = '#667eea';
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

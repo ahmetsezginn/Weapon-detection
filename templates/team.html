@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+
+{% block title %}Team - AI Threat Detection System{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="page-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="section-badge mb-3">Our Team</div>
+                <h1 class="page-hero-title">Meet the Team</h1>
+                <p class="page-hero-subtitle">Talented individuals behind this innovative project</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Members Section -->
+<section class="content-section py-5">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            <!-- Ahmet Sezgin -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/>
+                        </svg>
+                    </div>
+                    <h4 class="team-name">Ahmet Sezgin</h4>
+                    <p class="team-role">Dataset & Model Development Specialist</p>
+                    <p class="team-description">
+                        Responsible for collecting, cleaning, and preparing the dataset. 
+                        Developed and tested the initial models, performed accuracy evaluations, 
+                        and optimized model performance.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Necdet Çevik -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
+                        </svg>
+                    </div>
+                    <h4 class="team-name">Necdet Çevik</h4>
+                    <p class="team-role">Model Training & Technical Documentation Engineer</p>
+                    <p class="team-description">
+                        Focused on training deep-learning models, comparing architectures, 
+                        and preparing evaluation reports. Wrote detailed project documentation 
+                        and technical explanations.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Amani Kanti -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/>
+                        </svg>
+                    </div>
+                    <h4 class="team-name">Amani Kanti</h4>
+                    <p class="team-role">Full-Stack Developer & System Integration Engineer</p>
+                    <p class="team-description">
+                        Developed the entire web interface, built the frontend–backend connection, 
+                        and integrated the YOLO model into the Python backend. 
+                        Also assisted in model experimentation and testing.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Acknowledgements Section -->
+<section class="content-section py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="acknowledgement-card">
+                    <div class="acknowledgement-icon mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.304.144.531.208.8.208s.496-.064.8-.208c.304-.143.662-.352 1.048-.625a11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0z"/>
+                        </svg>
+                    </div>
+                    <h2 class="acknowledgement-title text-center">Project Acknowledgements</h2>
+                    <p class="acknowledgement-text text-center">We would like to thank our academic institution and advisors for their support throughout this project. This system represents the culmination of theoretical knowledge and practical application in the field of computer vision and security technology.</p>
+                    <p class="acknowledgement-text text-center">Special thanks to the open-source community and the developers of YOLOv11, PyTorch, and other technologies that made this project possible.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.page-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 120px 0 80px;
+    color: white;
+    text-align: center;
+}
+
+.page-hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.page-hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.content-section {
+    padding: 80px 0;
+}
+
+.team-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+.team-avatar {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 0 auto 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+}
+
+.team-card:hover .team-avatar {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+.team-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.team-role {
+    font-size: 1rem;
+    color: #667eea;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    text-transform: none;
+    letter-spacing: 0.3px;
+}
+
+.team-description {
+    color: var(--text-light);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+.acknowledgement-card {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.acknowledgement-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 0 auto;
+}
+
+.acknowledgement-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+}
+
+.acknowledgement-text {
+    color: var(--text-light);
+    line-height: 1.9;
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .page-hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .team-card {
+        padding: 2rem;
+    }
+    
+    .acknowledgement-card {
+        padding: 2rem;
+    }
+}
+</style>
+{% endblock %}

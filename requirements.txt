@@ -1,0 +1,32 @@
+# =============================================================================
+# CPU Requirements for Threat Detection System
+# =============================================================================
+# This file installs PyTorch CPU version (no GPU support).
+#
+# FOR GPU SUPPORT (NVIDIA):
+#   pip install -r requirements-gpu.txt
+#
+# =============================================================================
+
+# Flask Web Framework
+Flask==2.3.2
+
+# PyTorch (CPU version)
+torch>=2.0.0
+torchvision>=0.15.0
+
+# YOLOv8 Object Detection
+ultralytics>=8.3.0
+
+# Computer Vision
+opencv-python>=4.8.0
+
+# Data Processing
+numpy>=1.24.0
+Pillow>=10.0.0
+
+# Web Interface
+gradio>=4.0.0
+
+# Video Processing (includes FFmpeg)
+imageio-ffmpeg>=0.6.0

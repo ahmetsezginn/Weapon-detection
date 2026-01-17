@@ -1,0 +1,40 @@
+# =============================================================================
+# GPU Requirements for Threat Detection System (CUDA 12.1)
+# =============================================================================
+# This file installs PyTorch with CUDA 12.1 support for newer NVIDIA GPUs.
+# 
+# INSTALLATION:
+#   pip install -r requirements-gpu-cu121.txt
+#
+# USE THIS IF:
+#   - You have a newer GPU (RTX 40 series, etc.)
+#   - Your nvidia-smi shows CUDA 12.x
+#
+# CHECK YOUR CUDA VERSION:
+#   nvidia-smi
+#
+# =============================================================================
+
+# Flask Web Framework
+Flask==2.3.2
+
+# PyTorch with CUDA 12.1 support
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch>=2.0.0
+torchvision>=0.15.0
+
+# YOLOv8 Object Detection
+ultralytics>=8.3.0
+
+# Computer Vision
+opencv-python>=4.8.0
+
+# Data Processing
+numpy>=1.24.0
+Pillow>=10.0.0
+
+# Web Interface
+gradio>=4.0.0
+
+# Video Processing (includes FFmpeg)
+imageio-ffmpeg>=0.6.0
